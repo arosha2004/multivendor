@@ -1,14 +1,52 @@
 <x-app-layout>
     @if(auth()->user()->role === 'vendor')
-        <x-slot name="header">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('Vendor Dashboard') }}
-            </h2>
-        </x-slot>
-    @endif
+        {{-- Custom Vendor Navbar --}}
+        <div class="bg-white border-b border-gray-200 shadow-sm relative z-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between h-16">
+                    <!-- Left: Logo & Title -->
+                    <div class="flex items-center space-x-6">
+                        <a href="{{ route('dashboard') }}" class="text-3xl font-extrabold tracking-tighter text-black lowercase leading-none hover:opacity-80 transition">moon</a>
+                        <div class="h-6 w-px bg-gray-200"></div>
+                        <div class="flex items-center">
+                            <span class="bg-gray-900 text-white text-xs font-bold px-3 py-1 rounded-md uppercase tracking-wider shadow-sm">
+                                Vendor Dashboard
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <!-- Right: Actions -->
+                    <div class="flex items-center space-x-3 sm:space-x-4">
+                        <!-- Switch to Buyer View -->
+                        <a href="{{ url('/') }}" class="hidden sm:flex bg-blue-50 text-blue-700 hover:bg-blue-100 px-4 py-2 rounded-full text-sm font-bold transition items-center space-x-2 border border-blue-100 shadow-sm">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                            <span>Buyer View</span>
+                        </a>
+                        <!-- Mobile Switch to Buyer View -->
+                        <a href="{{ url('/') }}" class="sm:hidden p-2 rounded-full hover:bg-blue-50 text-blue-600 transition" title="Buyer View">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                        </a>
+                        
+                        <div class="h-6 w-px bg-gray-200 hidden sm:block"></div>
+                        
+                        <!-- Profile Edit -->
+                        <a href="{{ route('profile.edit') }}" class="p-2 rounded-full hover:bg-gray-100 text-gray-500 hover:text-gray-900 transition focus:outline-none focus:ring-2 focus:ring-gray-200" title="Edit Profile">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                        </a>
+                        
+                        <!-- Logout -->
+                        <form method="POST" action="{{ route('logout') }}" class="inline">
+                            @csrf
+                            <button type="submit" class="p-2 rounded-full hover:bg-red-50 text-gray-500 hover:text-red-600 transition focus:outline-none focus:ring-2 focus:ring-red-100" title="Log Out">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    @if(auth()->user()->role === 'vendor')
-        {{-- VENDOR VIEW --}}
+        {{-- VENDOR VIEW CONTENT --}}
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
                 <!-- Add Product Form -->

@@ -16,7 +16,7 @@
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-yellow-50 flex flex-col">
-            @if(!request()->routeIs('dashboard') || (auth()->check() && auth()->user()->role !== 'buyer'))
+            @if(!request()->routeIs('dashboard'))
                 @include('layouts.navigation')
             @endif
 

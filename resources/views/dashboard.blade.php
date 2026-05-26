@@ -111,7 +111,7 @@
         {{-- BUYER VIEW --}}
         
         <!-- Top Yellow Header mimicking moon -->
-        <div class="bg-[#FEE000] py-4 px-4 sm:px-6 flex items-center justify-between shadow-sm relative z-50">
+        <div class="bg-[#FEE000] py-4 px-4 sm:px-6 flex items-center justify-between shadow-sm relative z-50" style="background-color: #FEE000;">
             <div class="flex items-center space-x-6 shrink-0">
                 <!-- Moon Logo -->
                 <div class="text-3xl sm:text-4xl font-extrabold tracking-tighter text-black lowercase leading-none">moon</div>
@@ -201,7 +201,7 @@
         </div>
 
         <!-- Main Content -->
-        <div class="max-w-[1400px] mx-auto p-4 md:p-6 bg-gray-50 min-h-screen">
+        <div class="max-w-[1400px] mx-auto p-4 md:p-6 bg-yellow-50 min-h-screen">
             <h2 class="text-xl md:text-2xl font-bold mb-4 text-gray-800">Recommended for you</h2>
             
             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3">

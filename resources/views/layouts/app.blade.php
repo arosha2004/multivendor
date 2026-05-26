@@ -15,8 +15,10 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100">
-            @include('layouts.navigation')
+        <div class="min-h-screen bg-yellow-50">
+            @if(!request()->routeIs('dashboard') || (auth()->check() && auth()->user()->role !== 'buyer'))
+                @include('layouts.navigation')
+            @endif
 
             <!-- Page Heading -->
             @isset($header)

@@ -216,66 +216,68 @@
             
             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3">
                 @foreach($products as $product)
-                    <div class="bg-white rounded-lg p-3 hover:shadow-xl transition-all duration-300 relative flex flex-col group border border-gray-200 cursor-pointer hover:-translate-y-1">
-                        <!-- Best Seller Tag -->
-                        @if($product->is_best_seller)
-                            <div class="absolute top-2 left-2 bg-[#0E7153] text-white text-[10px] font-bold px-1.5 py-0.5 rounded z-10 uppercase shadow-sm">
-                                Best Seller
-                            </div>
-                        @endif
-
-                        <!-- Wishlist Icon -->
-                        <div class="absolute top-2 right-2 bg-white rounded-full p-1.5 shadow border border-gray-100 opacity-0 group-hover:opacity-100 transition-opacity z-10 cursor-pointer hover:bg-gray-50 text-gray-400 hover:text-red-500">
-                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
-                        </div>
-
-                        <!-- Image -->
-                        <div class="relative pt-[100%] w-full mb-3 bg-white rounded flex items-center justify-center">
-                            <img src="{{ asset('storage/' . $product->image_path) }}" alt="{{ $product->title }}" class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-w-full max-h-full object-contain p-2 transition-transform duration-500 group-hover:scale-105">
-                        </div>
-
-                        <!-- Details -->
-                        <div class="flex flex-col flex-1">
-                            <h3 class="text-xs text-gray-700 line-clamp-2 min-h-[32px] mb-1 group-hover:text-blue-600 transition-colors">{{ $product->title }}</h3>
-                            
-                            <div class="flex items-center mb-1 space-x-1">
-                                <div class="flex items-center text-[#1FA628]">
-                                    <span class="text-xs font-bold">{{ $product->rating }}</span>
-                                    <svg class="w-3 h-3 ml-0.5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                    <a href="{{ route('products.show', $product) }}" class="block no-underline">
+                        <div class="bg-white rounded-lg p-3 hover:shadow-xl transition-all duration-300 relative flex flex-col group border border-gray-200 cursor-pointer hover:-translate-y-1">
+                            <!-- Best Seller Tag -->
+                            @if($product->is_best_seller)
+                                <div class="absolute top-2 left-2 bg-[#0E7153] text-white text-[10px] font-bold px-1.5 py-0.5 rounded z-10 uppercase shadow-sm">
+                                    Best Seller
                                 </div>
-                                <span class="text-xs text-gray-400">({{ $product->reviews_count > 1000 ? round($product->reviews_count/1000, 1).'K' : $product->reviews_count }})</span>
-                            </div>
-
-                            <div class="flex items-baseline mb-0.5">
-                                <span class="text-xs font-semibold mr-1">AED</span>
-                                <span class="text-lg font-bold text-gray-900">{{ number_format($product->price, 2) }}</span>
-                            </div>
-
-                            @if($product->original_price && $product->original_price > $product->price)
-                                @php
-                                    $discount = round((($product->original_price - $product->price) / $product->original_price) * 100);
-                                @endphp
-                                <div class="flex items-center text-[10px] space-x-1 mb-2">
-                                    <span class="text-gray-400 line-through">{{ number_format($product->original_price, 2) }}</span>
-                                    <span class="text-[#1FA628] font-bold">{{ $discount }}% OFF</span>
-                                </div>
-                            @else
-                                <div class="h-[15px] mb-2"></div>
                             @endif
-                            
-                            <div class="mt-auto pt-2">
-                                @if($product->delivery_badge)
-                                    <div class="bg-[#243BB9] text-white text-[11px] font-bold px-2 py-1.5 rounded inline-flex w-full items-center justify-between tracking-wider shadow-sm group-hover:bg-[#1C2C8C] transition-colors">
-                                        <div class="flex items-center">
-                                            <svg class="w-3.5 h-3.5 mr-1 text-yellow-300" fill="currentColor" viewBox="0 0 20 20"><path d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z"></path></svg>
-                                            <span class="italic">{{ $product->delivery_badge }}</span>
-                                        </div>
-                                        <svg class="w-4 h-4 text-white opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+
+                            <!-- Wishlist Icon -->
+                            <div class="absolute top-2 right-2 bg-white rounded-full p-1.5 shadow border border-gray-100 opacity-0 group-hover:opacity-100 transition-opacity z-10 cursor-pointer hover:bg-gray-50 text-gray-400 hover:text-red-500">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+                            </div>
+
+                            <!-- Image -->
+                            <div class="relative pt-[100%] w-full mb-3 bg-white rounded flex items-center justify-center">
+                                <img src="{{ asset('storage/' . $product->image_path) }}" alt="{{ $product->title }}" class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-w-full max-h-full object-contain p-2 transition-transform duration-500 group-hover:scale-105">
+                            </div>
+
+                            <!-- Details -->
+                            <div class="flex flex-col flex-1">
+                                <h3 class="text-xs text-gray-700 line-clamp-2 min-h-[32px] mb-1 group-hover:text-blue-600 transition-colors">{{ $product->title }}</h3>
+                                
+                                <div class="flex items-center mb-1 space-x-1">
+                                    <div class="flex items-center text-[#1FA628]">
+                                        <span class="text-xs font-bold">{{ $product->rating }}</span>
+                                        <svg class="w-3 h-3 ml-0.5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
                                     </div>
+                                    <span class="text-xs text-gray-400">({{ $product->reviews_count > 1000 ? round($product->reviews_count/1000, 1).'K' : $product->reviews_count }})</span>
+                                </div>
+
+                                <div class="flex items-baseline mb-0.5">
+                                    <span class="text-xs font-semibold mr-1">AED</span>
+                                    <span class="text-lg font-bold text-gray-900">{{ number_format($product->price, 2) }}</span>
+                                </div>
+
+                                @if($product->original_price && $product->original_price > $product->price)
+                                    @php
+                                        $discount = round((($product->original_price - $product->price) / $product->original_price) * 100);
+                                    @endphp
+                                    <div class="flex items-center text-[10px] space-x-1 mb-2">
+                                        <span class="text-gray-400 line-through">{{ number_format($product->original_price, 2) }}</span>
+                                        <span class="text-[#1FA628] font-bold">{{ $discount }}% OFF</span>
+                                    </div>
+                                @else
+                                    <div class="h-[15px] mb-2"></div>
                                 @endif
+                                
+                                <div class="mt-auto pt-2">
+                                    @if($product->delivery_badge)
+                                        <div class="bg-[#243BB9] text-white text-[11px] font-bold px-2 py-1.5 rounded inline-flex w-full items-center justify-between tracking-wider shadow-sm group-hover:bg-[#1C2C8C] transition-colors">
+                                            <div class="flex items-center">
+                                                <svg class="w-3.5 h-3.5 mr-1 text-yellow-300" fill="currentColor" viewBox="0 0 20 20"><path d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z"></path></svg>
+                                                <span class="italic">{{ $product->delivery_badge }}</span>
+                                            </div>
+                                            <svg class="w-4 h-4 text-white opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                        </div>
+                                    @endif
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 @endforeach
             </div>
             

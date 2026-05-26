@@ -53,4 +53,10 @@ class ProductController extends Controller
 
         return redirect()->route('dashboard')->with('success', 'Product added successfully.');
     }
+
+    public function show(\App\Models\Product $product)
+    {
+        $product->load('vendor');
+        return view('products.show', compact('product'));
+    }
 }

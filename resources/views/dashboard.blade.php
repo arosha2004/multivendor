@@ -29,6 +29,23 @@
                                     <x-input-error :messages="$errors->get('title')" class="mt-2" />
                                 </div>
                                 <div>
+                                    <x-input-label for="category" value="Category" />
+                                    <select id="category" name="category" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm mt-1 block w-full" required>
+                                        <option value="">Select a category</option>
+                                        <option value="Electronics">Electronics</option>
+                                        <option value="Beauty & Fragrance">Beauty & Fragrance</option>
+                                        <option value="Home & Kitchen">Home & Kitchen</option>
+                                        <option value="Grocery">Grocery</option>
+                                        <option value="Men's Fashion">Men's Fashion</option>
+                                        <option value="Women's Fashion">Women's Fashion</option>
+                                        <option value="Baby">Baby</option>
+                                        <option value="Toys">Toys</option>
+                                        <option value="Kids' Fashion">Kids' Fashion</option>
+                                        <option value="Sports & Outdoors">Sports & Outdoors</option>
+                                    </select>
+                                    <x-input-error :messages="$errors->get('category')" class="mt-2" />
+                                </div>
+                                <div>
                                     <x-input-label for="price" value="Price (AED)" />
                                     <x-text-input id="price" name="price" type="number" step="0.01" class="mt-1 block w-full" required />
                                     <x-input-error :messages="$errors->get('price')" class="mt-2" />
@@ -64,6 +81,7 @@
                                         <tr>
                                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Image</th>
                                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Title</th>
+                                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Category</th>
                                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Price</th>
                                             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date Added</th>
                                         </tr>
@@ -75,6 +93,7 @@
                                                     <img src="{{ asset('storage/' . $product->image_path) }}" alt="{{ $product->title }}" class="h-10 w-10 object-cover rounded">
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ $product->title }}</td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $product->category }}</td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">AED {{ number_format($product->price, 2) }}</td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $product->created_at->format('M d, Y') }}</td>
                                             </tr>
@@ -91,43 +110,94 @@
     @else
         {{-- BUYER VIEW --}}
         
-        <!-- Top Yellow Header mimicking noon.com -->
-        <div class="bg-[#FEEA00] py-3 px-4 flex items-center justify-between shadow-sm relative z-50">
-            <div class="flex items-center space-x-4">
-                <div class="text-2xl md:text-3xl font-black italic tracking-tighter text-black">noon</div>
-                <div class="hidden md:flex items-center text-sm font-bold bg-yellow-400 px-3 py-1.5 rounded-md border border-yellow-500 cursor-pointer hover:bg-yellow-500 transition">
-                    <svg class="w-4 h-4 mr-1 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                    Other - Dubai
+        <!-- Top Yellow Header mimicking moon -->
+        <div class="bg-[#FEE000] py-4 px-4 sm:px-6 flex items-center justify-between shadow-sm relative z-50">
+            <div class="flex items-center space-x-6 shrink-0">
+                <!-- Moon Logo -->
+                <div class="text-3xl sm:text-4xl font-extrabold tracking-tighter text-black lowercase leading-none">moon</div>
+                <!-- Location -->
+                <div class="hidden md:flex items-center text-sm font-semibold text-gray-900 cursor-pointer">
+                    <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                    Other • LK
+                    <svg class="w-4 h-4 ml-1 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                 </div>
             </div>
-            <div class="flex-1 max-w-3xl mx-4">
-                <div class="relative">
-                    <input type="text" placeholder="Search for products..." class="w-full rounded-md border-0 py-2.5 px-4 text-gray-900 shadow-sm focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+
+            <!-- Search Bar -->
+            <div class="flex-1 max-w-4xl mx-4 lg:mx-8">
+                <div class="w-full bg-white rounded-full flex items-center px-5 py-2.5 shadow-sm border border-transparent focus-within:border-gray-200 overflow-hidden" style="outline: none !important;">
+                    <!-- Bold Search Icon -->
+                    <svg class="h-6 w-6 text-slate-900 mr-3 shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    </svg>
+                    <!-- Input Field -->
+                    <input type="text" placeholder="What are you looking for?" class="w-full bg-transparent border-none focus:border-none focus:ring-0 focus:ring-offset-0 focus:outline-none p-0 text-gray-900 placeholder-[#5A738E] text-[15px] sm:text-base font-normal shadow-none focus:shadow-none" style="border: none !important; outline: none !important; box-shadow: none !important;">
                 </div>
             </div>
-            <div class="hidden lg:flex items-center space-x-6 text-sm font-semibold text-black">
-                <div class="cursor-pointer font-bold">العربية</div>
-                <div class="flex items-center cursor-pointer hover:text-gray-700 transition"><svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg> {{ explode(' ', Auth::user()->name)[0] }}</div>
-                <div class="flex items-center cursor-pointer hover:text-gray-700 transition"><svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg> Cart</div>
-                <!-- Logout form for Buyer view -->
-                <form method="POST" action="{{ route('logout') }}" class="inline">
+
+            <!-- Top Right Nav -->
+            <div class="hidden lg:flex items-center space-x-6 text-sm font-bold text-black shrink-0">
+                <!-- Log in / Profile -->
+                @guest
+                    <a href="{{ route('login') }}" class="flex items-center cursor-pointer hover:text-gray-700 transition space-x-1">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg> 
+                        <span>Log in</span>
+                    </a>
+                @else
+                    <a href="{{ route('profile.edit') }}" class="flex items-center cursor-pointer hover:text-gray-700 transition space-x-1">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg> 
+                        <span class="truncate max-w-[150px]">{{ Auth::user()->name }}</span>
+                    </a>
+                @endguest
+                <!-- Orders -->
+                <div class="flex items-center cursor-pointer hover:text-gray-700 transition space-x-1 border-l border-black/10 pl-6">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg> 
+                    <span>Orders</span>
+                </div>
+                <!-- Wishlist -->
+                <div class="flex items-center cursor-pointer hover:text-gray-700 transition space-x-1 border-l border-black/10 pl-6">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg> 
+                    <span>Wishlist</span>
+                </div>
+                <!-- Cart -->
+                <div class="flex items-center cursor-pointer hover:text-gray-700 transition space-x-1 border-l border-black/10 pl-6">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg> 
+                    <span>Cart</span>
+                </div>
+                @auth
+                <form method="POST" action="{{ route('logout') }}" class="inline border-l border-black/10 pl-6">
                     @csrf
                     <button type="submit" class="flex items-center cursor-pointer text-red-600 hover:text-red-800 transition">Log out</button>
                 </form>
+                @endauth
             </div>
         </div>
 
         <!-- Categories Bar -->
-        <div class="bg-white border-b border-gray-200 overflow-x-auto whitespace-nowrap px-4 py-3 flex items-center space-x-6 text-sm font-bold text-gray-700 shadow-sm relative z-40">
-            <a href="#" class="hover:text-blue-600 transition">Electronics</a>
-            <a href="#" class="hover:text-blue-600 transition">Beauty & Fragrance</a>
-            <a href="#" class="hover:text-blue-600 transition">Home & Kitchen</a>
-            <a href="#" class="text-blue-600 border-b-[3px] border-blue-600 pb-[10px] mt-[13px] relative -top-[2px]">Grocery</a>
-            <a href="#" class="hover:text-blue-600 transition">Men's Fashion</a>
-            <a href="#" class="hover:text-blue-600 transition">Women's Fashion</a>
-            <a href="#" class="hover:text-blue-600 transition">Baby</a>
-            <a href="#" class="hover:text-blue-600 transition">Toys</a>
-            <a href="#" class="hover:text-blue-600 transition">Sports & Outdoors</a>
+        <div class="bg-white border-b border-gray-200 overflow-x-auto whitespace-nowrap px-4 sm:px-6 flex items-center justify-between relative z-40">
+            <div class="flex items-center space-x-6 text-sm font-semibold text-gray-800 py-3">
+                <a href="#" class="hover:text-blue-600 transition">Electronics</a>
+                <a href="#" class="hover:text-blue-600 transition">Beauty & Fragrance</a>
+                <a href="#" class="hover:text-blue-600 transition">Home & Kitchen</a>
+                <a href="#" class="hover:text-blue-600 transition">Grocery</a>
+                <a href="#" class="hover:text-blue-600 transition">Men's Fashion</a>
+                <a href="#" class="hover:text-blue-600 transition">Women's Fashion</a>
+                <a href="#" class="hover:text-blue-600 transition">Baby</a>
+                <a href="#" class="hover:text-blue-600 transition">Toys</a>
+                <a href="#" class="hover:text-blue-600 transition">Kids' Fashion</a>
+                <a href="#" class="hover:text-blue-600 transition">Sports & Outdoors</a>
+                <a href="#" class="hover:text-blue-600 transition flex items-center">
+                    <svg class="w-4 h-4 ml-1 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                </a>
+            </div>
+            
+            <div class="hidden lg:flex items-center shrink-0 h-full py-1.5 ml-4">
+                <div class="flex items-center border border-red-500 rounded-full px-3 py-1 bg-gradient-to-r from-yellow-50 to-red-50 cursor-pointer">
+                    <span class="text-sm font-bold text-gray-800 mr-2">Get <span class="font-extrabold text-black">Free Delivery</span> with moon</span>
+                    <span class="bg-gradient-to-r from-yellow-400 to-red-500 text-black text-xs font-black italic px-2 py-0.5 rounded-full shadow-sm">one</span>
+                    <svg class="w-3 h-3 ml-1 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"></path></svg>
+                </div>
+            </div>
         </div>
 
         <!-- Main Content -->

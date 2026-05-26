@@ -12,6 +12,7 @@ class Product extends Model
         'price',
         'original_price',
         'image_path',
+        'category',
         'rating',
         'reviews_count',
         'is_best_seller',

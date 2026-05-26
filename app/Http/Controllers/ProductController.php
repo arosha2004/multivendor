@@ -14,6 +14,7 @@ class ProductController extends Controller
 
         $request->validate([
             'title' => 'required|string|max:255',
+            'category' => 'required|string|max:255',
             'price' => 'required|numeric',
             'original_price' => 'nullable|numeric',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
@@ -25,10 +26,11 @@ class ProductController extends Controller
         $rating = rand(35, 50) / 10; // 3.5 to 5.0
         $reviewsCount = rand(50, 50000);
         $isBestSeller = rand(0, 100) > 70; // 30% chance to be best seller
-        $deliveryBadge = 'GET IN ' . rand(15, 60) . ' MINS';
+        $deliveryBadge = 'GET IT NOW';
 
         auth()->user()->products()->create([
             'title' => $request->title,
+            'category' => $request->category,
             'price' => $request->price,
             'original_price' => $request->original_price,
             'image_path' => $imagePath,

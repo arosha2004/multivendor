@@ -15,7 +15,7 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased">
-        <div class="min-h-screen bg-yellow-50">
+        <div class="min-h-screen bg-yellow-50 flex flex-col">
             @if(!request()->routeIs('dashboard') || (auth()->check() && auth()->user()->role !== 'buyer'))
                 @include('layouts.navigation')
             @endif
@@ -30,9 +30,12 @@
             @endisset
 
             <!-- Page Content -->
-            <main>
+            <main class="flex-grow">
                 {{ $slot }}
             </main>
+
+            <!-- Footer -->
+            @include('layouts.footer')
         </div>
     </body>
 </html>

@@ -17,6 +17,12 @@ class Product extends Model
         'reviews_count',
         'is_best_seller',
         'delivery_badge',
+        'description',
+        'images',
+    ];
+
+    protected $casts = [
+        'images' => 'array',
     ];
 
     public function vendor()

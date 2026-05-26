@@ -56,9 +56,19 @@
                                     <x-input-error :messages="$errors->get('original_price')" class="mt-2" />
                                 </div>
                                 <div>
-                                    <x-input-label for="image" value="Product Image" />
+                                    <x-input-label for="image" value="Cover Image" />
                                     <input id="image" name="image" type="file" class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100" required />
                                     <x-input-error :messages="$errors->get('image')" class="mt-2" />
+                                </div>
+                                <div>
+                                    <x-input-label for="additional_images" value="Additional Images (Optional)" />
+                                    <input id="additional_images" name="additional_images[]" type="file" multiple class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100" />
+                                    <x-input-error :messages="$errors->get('additional_images')" class="mt-2" />
+                                </div>
+                                <div class="md:col-span-2">
+                                    <x-input-label for="description" value="Product Description" />
+                                    <textarea id="description" name="description" rows="3" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm mt-1 block w-full"></textarea>
+                                    <x-input-error :messages="$errors->get('description')" class="mt-2" />
                                 </div>
                             </div>
                             <div class="mt-4">

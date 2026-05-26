@@ -18,9 +18,18 @@ class ProductController extends Controller
             'price' => 'required|numeric',
             'original_price' => 'nullable|numeric',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+            'description' => 'nullable|string',
+            'additional_images.*' => 'image|mimes:jpeg,png,jpg,gif,webp|max:2048',
         ]);
 
         $imagePath = $request->file('image')->store('products', 'public');
+
+        $additionalImages = [];
+        if ($request->hasFile('additional_images')) {
+            foreach ($request->file('additional_images') as $file) {
+                $additionalImages[] = $file->store('products', 'public');
+            }
+        }
 
         // Generate random values for aesthetics matching noon.com
         $rating = rand(35, 50) / 10; // 3.5 to 5.0
@@ -33,7 +42,9 @@ class ProductController extends Controller
             'category' => $request->category,
             'price' => $request->price,
             'original_price' => $request->original_price,
+            'description' => $request->description,
             'image_path' => $imagePath,
+            'images' => $additionalImages,
             'rating' => $rating,
             'reviews_count' => $reviewsCount,
             'is_best_seller' => $isBestSeller,

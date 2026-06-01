@@ -84,7 +84,7 @@ class ProductController extends Controller
             'image_path' => $imagePath,
         ]);
 
-        return redirect()->route('dashboard')->with('success', 'Cover image updated successfully.');
+        return redirect()->back()->with('success', 'Cover image updated successfully.');
     }
 
     public function addImages(Request $request, Product $product)
@@ -109,7 +109,7 @@ class ProductController extends Controller
             'images' => $currentImages,
         ]);
 
-        return redirect()->route('dashboard')->with('success', 'Additional images uploaded successfully.');
+        return redirect()->back()->with('success', 'Additional images uploaded successfully.');
     }
 
     public function deleteImage(Request $request, Product $product)
@@ -137,7 +137,7 @@ class ProductController extends Controller
             ]);
         }
 
-        return redirect()->route('dashboard')->with('success', 'Image removed successfully.');
+        return redirect()->back()->with('success', 'Image removed successfully.');
     }
 
     public function destroy(Product $product)
@@ -160,6 +160,40 @@ class ProductController extends Controller
 
         $product->delete();
 
-        return redirect()->route('dashboard')->with('success', 'Product deleted successfully.');
+        return redirect()->back()->with('success', 'Product deleted successfully.');
+    }
+
+    public function update(Request $request, Product $product)
+    {
+        if (auth()->user()->id !== $product->vendor_id) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'category' => 'required|string|max:255',
+            'price' => 'required|numeric',
+            'original_price' => 'nullable|numeric',
+            'description' => 'nullable|string',
+        ]);
+
+        $product->update([
+            'title' => $request->title,
+            'category' => $request->category,
+            'price' => $request->price,
+            'original_price' => $request->original_price,
+            'description' => $request->description,
+        ]);
+
+        return redirect()->back()->with('success', 'Product details updated successfully.');
+    }
+
+    public function vendorIndex()
+    {
+        if (auth()->user()->role !== 'vendor') {
+            abort(403, 'Unauthorized action.');
+        }
+        $products = auth()->user()->products()->latest()->get();
+        return view('vendor.products', compact('products'));
     }
 }

@@ -17,6 +17,14 @@
                     
                     <!-- Right: Actions -->
                     <div class="flex items-center space-x-4">
+                        <!-- My Catalog -->
+                        <a href="{{ route('vendor.products') }}" class="flex bg-white hover:bg-gray-50 text-gray-700 px-4 py-2 rounded-full text-sm font-bold transition items-center space-x-2 border border-gray-250 shadow-sm">
+                            <svg class="w-4 h-4 text-gray-550" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 12h16.5m-16.5 3.75h16.5M3.75 19.5h16.5M5.625 4.5h12.75c.621 0 1.125.504 1.125 1.125v1.875c0 .621-.504 1.125-1.125 1.125H5.625A1.125 1.125 0 0 1 4.5 6.75V5.625c0-.621.504-1.125 1.125-1.125Z" />
+                            </svg>
+                            <span>My Catalog</span>
+                        </a>
+
                         <!-- Switch to Buyer View -->
                         <a href="{{ url('/') }}" class="flex bg-white hover:bg-gray-50 text-gray-700 px-4 py-2 rounded-full text-sm font-bold transition items-center space-x-2 border border-gray-250 shadow-sm">
                             <svg class="w-4 h-4 text-gray-550" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">

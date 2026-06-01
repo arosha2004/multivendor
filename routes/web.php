@@ -35,6 +35,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/products/{product}/images', [ProductController::class, 'addImages'])->name('products.add-images');
     Route::delete('/products/{product}/images', [ProductController::class, 'deleteImage'])->name('products.delete-image');
     Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
+    Route::patch('/products/{product}', [ProductController::class, 'update'])->name('products.update');
+    Route::get('/vendor/products', [ProductController::class, 'vendorIndex'])->name('vendor.products');
 });
 
 require __DIR__.'/auth.php';

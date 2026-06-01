@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Product;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -54,9 +56,110 @@ class ProductController extends Controller
         return redirect()->route('dashboard')->with('success', 'Product added successfully.');
     }
 
-    public function show(\App\Models\Product $product)
+    public function show(Product $product)
     {
         $product->load('vendor');
         return view('products.show', compact('product'));
+    }
+
+    public function updateCover(Request $request, Product $product)
+    {
+        if (auth()->user()->id !== $product->vendor_id) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+        ]);
+
+        // Delete old cover image
+        if ($product->image_path && Storage::disk('public')->exists($product->image_path)) {
+            Storage::disk('public')->delete($product->image_path);
+        }
+
+        // Store new cover image
+        $imagePath = $request->file('image')->store('products', 'public');
+
+        $product->update([
+            'image_path' => $imagePath,
+        ]);
+
+        return redirect()->route('dashboard')->with('success', 'Cover image updated successfully.');
+    }
+
+    public function addImages(Request $request, Product $product)
+    {
+        if (auth()->user()->id !== $product->vendor_id) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $request->validate([
+            'additional_images' => 'required|array',
+            'additional_images.*' => 'image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+        ]);
+
+        $currentImages = $product->images ?? [];
+        if ($request->hasFile('additional_images')) {
+            foreach ($request->file('additional_images') as $file) {
+                $currentImages[] = $file->store('products', 'public');
+            }
+        }
+
+        $product->update([
+            'images' => $currentImages,
+        ]);
+
+        return redirect()->route('dashboard')->with('success', 'Additional images uploaded successfully.');
+    }
+
+    public function deleteImage(Request $request, Product $product)
+    {
+        if (auth()->user()->id !== $product->vendor_id) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $request->validate([
+            'image' => 'required|string',
+        ]);
+
+        $imageToDelete = $request->image;
+        $currentImages = $product->images ?? [];
+
+        if (($key = array_search($imageToDelete, $currentImages)) !== false) {
+            unset($currentImages[$key]);
+
+            if (Storage::disk('public')->exists($imageToDelete)) {
+                Storage::disk('public')->delete($imageToDelete);
+            }
+
+            $product->update([
+                'images' => array_values($currentImages),
+            ]);
+        }
+
+        return redirect()->route('dashboard')->with('success', 'Image removed successfully.');
+    }
+
+    public function destroy(Product $product)
+    {
+        if (auth()->user()->id !== $product->vendor_id) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        if ($product->image_path && Storage::disk('public')->exists($product->image_path)) {
+            Storage::disk('public')->delete($product->image_path);
+        }
+
+        if (!empty($product->images)) {
+            foreach ($product->images as $img) {
+                if (Storage::disk('public')->exists($img)) {
+                    Storage::disk('public')->delete($img);
+                }
+            }
+        }
+
+        $product->delete();
+
+        return redirect()->route('dashboard')->with('success', 'Product deleted successfully.');
     }
 }

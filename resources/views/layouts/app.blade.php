@@ -15,8 +15,8 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased">
-        <div class="min-h-screen bg-yellow-50 flex flex-col">
-            @if(!request()->routeIs('dashboard'))
+        <div class="min-h-screen bg-white flex flex-col">
+            @if(!request()->routeIs('dashboard') && !request()->is('/'))
                 @include('layouts.navigation')
             @endif
 

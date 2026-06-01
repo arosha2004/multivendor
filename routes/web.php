@@ -6,7 +6,11 @@ use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    if (auth()->check()) {
+        return redirect()->route('dashboard');
+    }
+    $products = Product::latest()->get();
+    return view('dashboard', compact('products'));
 });
 
 Route::get('/dashboard', function () {
@@ -27,6 +31,10 @@ Route::middleware('auth')->group(function () {
     
     Route::post('/products', [ProductController::class, 'store'])->name('products.store');
     Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');
+    Route::patch('/products/{product}/cover', [ProductController::class, 'updateCover'])->name('products.update-cover');
+    Route::post('/products/{product}/images', [ProductController::class, 'addImages'])->name('products.add-images');
+    Route::delete('/products/{product}/images', [ProductController::class, 'deleteImage'])->name('products.delete-image');
+    Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
 });
 
 require __DIR__.'/auth.php';

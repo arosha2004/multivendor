@@ -1,9 +1,8 @@
 <footer class="bg-white border-t border-gray-200 mt-auto">
     <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <!-- Brand -->
             <div class="space-y-4">
-                <div class="text-3xl font-extrabold tracking-tighter text-black lowercase leading-none">moon</div>
+                <div class="text-3xl font-extrabold tracking-tighter text-black lowercase leading-none">emall</div>
                 <p class="text-sm text-gray-500">Your one-stop destination for everything you need. Shop with confidence.</p>
                 <div class="flex space-x-4">
                     <!-- Social Icons -->
@@ -34,23 +33,23 @@
                 </ul>
             </div>
 
-            <!-- Explore moon -->
+            <!-- Explore emall -->
             <div>
-                <h3 class="text-sm font-bold text-gray-900 tracking-wider uppercase mb-4">Explore Moon</h3>
+                <h3 class="text-sm font-bold text-gray-900 tracking-wider uppercase mb-4">Explore Emall</h3>
                 <ul class="space-y-3">
-                    <li><a href="#" class="text-sm text-gray-500 hover:text-blue-600 transition">About Moon</a></li>
+                    <li><a href="#" class="text-sm text-gray-500 hover:text-blue-600 transition">About Emall</a></li>
                     <li><a href="#" class="text-sm text-gray-500 hover:text-blue-600 transition">Careers</a></li>
-                    <li><a href="#" class="text-sm text-gray-500 hover:text-blue-600 transition">Moon Cares</a></li>
+                    <li><a href="#" class="text-sm text-gray-500 hover:text-blue-600 transition">Emall Cares</a></li>
                     <li><a href="#" class="text-sm text-gray-500 hover:text-blue-600 transition">Terms & Conditions</a></li>
                     <li><a href="#" class="text-sm text-gray-500 hover:text-blue-600 transition">Privacy Policy</a></li>
                 </ul>
             </div>
 
-            <!-- Sell on moon -->
+            <!-- Sell on emall -->
             <div>
                 <h3 class="text-sm font-bold text-gray-900 tracking-wider uppercase mb-4">Make Money with Us</h3>
                 <ul class="space-y-3">
-                    <li><a href="#" class="text-sm text-gray-500 hover:text-blue-600 transition">Sell on Moon</a></li>
+                    <li><a href="#" class="text-sm text-gray-500 hover:text-blue-600 transition">Sell on Emall</a></li>
                     <li><a href="#" class="text-sm text-gray-500 hover:text-blue-600 transition">Become an Affiliate</a></li>
                     <li><a href="#" class="text-sm text-gray-500 hover:text-blue-600 transition">Advertise Your Products</a></li>
                 </ul>
@@ -84,7 +83,7 @@
 
         <div class="border-t border-gray-200 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
             <p class="text-sm text-gray-400">
-                &copy; {{ date('Y') }} moon. All rights reserved.
+                &copy; {{ date('Y') }} emall. All rights reserved.
             </p>
             <div class="mt-4 md:mt-0 flex space-x-6 text-sm text-gray-400">
                 <a href="#" class="hover:text-gray-900 transition">Terms of Service</a>

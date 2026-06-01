@@ -6,7 +6,7 @@
                 <div class="flex items-center justify-between h-16">
                     <!-- Left: Logo & Title -->
                     <div class="flex items-center space-x-6">
-                        <a href="{{ route('dashboard') }}" class="text-3xl font-extrabold tracking-tighter text-black lowercase leading-none hover:opacity-80 transition">moon</a>
+                        <a href="{{ route('dashboard') }}" class="text-3xl font-extrabold tracking-tighter text-black lowercase leading-none hover:opacity-80 transition">emall</a>
                         <div class="h-6 w-px bg-gray-200"></div>
                         <div class="flex items-center">
                             <span class="bg-gray-900 text-white text-xs font-bold px-3 py-1 rounded-md uppercase tracking-wider shadow-sm">
@@ -402,12 +402,12 @@
             }
         </style>
 
-        <!-- Top Yellow Header mimicking moon -->
+        <!-- Top Yellow Header mimicking emall -->
         <div class="bg-[#FEE000] w-full relative z-50 shadow-sm" style="background-color: #FEE000;">
             <div class="max-w-[1400px] mx-auto px-4 sm:px-6 flex items-center justify-between py-3.5">
                 <div class="flex items-center space-x-5 shrink-0">
-                    <!-- Moon Logo -->
-                    <a href="{{ route('dashboard') }}" class="text-3xl sm:text-4xl font-extrabold tracking-tighter text-black lowercase leading-none hover:opacity-85 transition">moon</a>
+                    <!-- emall Logo -->
+                    <a href="{{ route('dashboard') }}" class="text-3xl sm:text-4xl font-extrabold tracking-tighter text-black lowercase leading-none hover:opacity-85 transition">emall</a>
                     <!-- Location -->
                     <div class="hidden md:flex items-center text-sm font-semibold text-gray-900 cursor-pointer space-x-1">
                         <svg class="w-4 h-4 text-gray-800" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -521,7 +521,7 @@
                 <!-- Right Section: Free Delivery Badge -->
                 <div class="hidden lg:flex items-center shrink-0 ml-4 py-1.5">
                     <div class="flex items-center border border-red-500 rounded-full px-3 py-1 bg-gradient-to-r from-yellow-50 to-red-50 cursor-pointer">
-                        <span class="text-sm font-bold text-gray-800 mr-2">Get <span class="font-extrabold text-black">Free Delivery</span> with moon</span>
+                        <span class="text-sm font-bold text-gray-800 mr-2">Get <span class="font-extrabold text-black">Free Delivery</span> with emall</span>
                         <span class="bg-[#F57C00] text-white text-[11px] font-black italic px-2 py-0.5 rounded-full shadow-sm">one</span>
                         <svg class="w-3 h-3 ml-1 text-red-505" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"></path></svg>
                     </div>

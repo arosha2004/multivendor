@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ $product->title }} – Moon</title>
+    <title>{{ $product->title }} – emall</title>
     <meta name="description" content="{{ Str::limit($product->description, 160) }}">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <style>
@@ -83,7 +83,7 @@
     {{-- ======== YELLOW NAVBAR ======== --}}
     <div class="bg-[#FEE000] py-4 px-4 sm:px-6 flex items-center justify-between shadow-sm" style="background-color:#FEE000;">
         <div class="flex items-center space-x-6 shrink-0">
-            <a href="{{ route('dashboard') }}" class="text-3xl font-extrabold tracking-tighter text-black lowercase leading-none">moon</a>
+            <a href="{{ route('dashboard') }}" class="text-3xl font-extrabold tracking-tighter text-black lowercase leading-none">emall</a>
             <div class="hidden md:flex items-center text-sm font-semibold text-gray-900 cursor-pointer">
                 <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
                 Other • LK

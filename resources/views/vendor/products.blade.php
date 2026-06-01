@@ -5,7 +5,7 @@
             <div class="flex items-center justify-between h-16">
                 <!-- Left: Logo & Title -->
                 <div class="flex items-center space-x-6">
-                    <a href="{{ route('dashboard') }}" class="text-3xl font-extrabold tracking-tighter text-black lowercase leading-none hover:opacity-80 transition">moon</a>
+                    <a href="{{ route('dashboard') }}" class="text-3xl font-extrabold tracking-tighter text-black lowercase leading-none hover:opacity-80 transition">emall</a>
                     <div class="h-6 w-px bg-gray-200"></div>
                     <div class="flex items-center">
                         <span class="bg-gray-900 text-white text-xs font-bold px-3 py-1 rounded-md uppercase tracking-wider shadow-sm">

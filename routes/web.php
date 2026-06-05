@@ -32,6 +32,7 @@ Route::middleware('auth')->group(function () {
     
     Route::post('/products', [ProductController::class, 'store'])->name('products.store');
     Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');
+    Route::get('/vendor/{id}/store', [ProductController::class, 'vendorStore'])->name('vendor.store');
     Route::patch('/products/{product}/cover', [ProductController::class, 'updateCover'])->name('products.update-cover');
     Route::post('/products/{product}/images', [ProductController::class, 'addImages'])->name('products.add-images');
     Route::delete('/products/{product}/images', [ProductController::class, 'deleteImage'])->name('products.delete-image');

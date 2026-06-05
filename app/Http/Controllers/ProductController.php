@@ -196,4 +196,11 @@ class ProductController extends Controller
         $products = auth()->user()->products()->latest()->get();
         return view('vendor.products', compact('products'));
     }
+
+    public function vendorStore($id)
+    {
+        $vendor = \App\Models\User::findOrFail($id);
+        $products = $vendor->products()->latest()->get();
+        return view('vendor.store', compact('vendor', 'products'));
+    }
 }

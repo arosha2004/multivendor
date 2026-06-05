@@ -254,6 +254,31 @@
                     </div>
                     <p class="text-xs text-gray-400 mb-5">Inclusive of VAT</p>
 
+                    {{-- Dynamic Features --}}
+                    @if(!empty($product->features) && is_array($product->features))
+                        <div class="mb-5 space-y-4 border-t border-gray-100 pt-5">
+                            @foreach($product->features as $fIndex => $feature)
+                                <div>
+                                    <h3 class="text-[11px] font-bold uppercase tracking-wider text-gray-500 mb-2.5 flex items-center">
+                                        {{ $feature['name'] }}
+                                        @if(strtoupper($feature['name']) === 'VERSION')
+                                            <svg class="w-3.5 h-3.5 ml-1 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                        @endif
+                                    </h3>
+                                    <div class="flex flex-wrap gap-2">
+                                        @foreach($feature['options'] as $oIndex => $option)
+                                            <button type="button" 
+                                                    onclick="selectFeatureOption(this, 'feature-{{ $fIndex }}')"
+                                                    class="feature-option feature-{{ $fIndex }} px-4 py-2 border {{ $oIndex === 0 ? 'border-gray-900 border-[1.5px]' : 'border-gray-200' }} rounded-lg text-sm font-semibold text-gray-800 hover:border-gray-400 transition bg-white focus:outline-none">
+                                                {{ $option }}
+                                            </button>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    @endif
+
                     {{-- Delivery --}}
                     <div class="border border-gray-100 rounded-lg p-4 mb-5 bg-gray-50">
                         <p class="text-xs font-bold uppercase tracking-wider text-gray-500 mb-3">Delivery Information</p>
@@ -494,6 +519,16 @@
             icon.style.fill = isActive ? 'none' : 'rgb(239, 68, 68)';
             icon.style.stroke = isActive ? 'currentColor' : 'rgb(239, 68, 68)';
             btn.classList.toggle('border-red-400', !isActive);
+        }
+
+        // Feature selection logic
+        function selectFeatureOption(btn, groupClass) {
+            document.querySelectorAll('.' + groupClass).forEach(el => {
+                el.classList.remove('border-gray-900', 'border-[1.5px]');
+                el.classList.add('border-gray-200');
+            });
+            btn.classList.remove('border-gray-200');
+            btn.classList.add('border-gray-900', 'border-[1.5px]');
         }
     </script>
 </body>

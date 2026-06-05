@@ -208,6 +208,20 @@
                         <textarea id="edit-description" name="description" rows="4" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-lg shadow-sm mt-1.5 block w-full"></textarea>
                     </div>
 
+                    <div class="border-t border-gray-100 pt-4 mt-2">
+                        <div class="flex items-center justify-between mb-3">
+                            <div>
+                                <h4 class="font-bold text-gray-800 text-base">Additional Features</h4>
+                            </div>
+                            <button type="button" onclick="addEditFeatureRow()" class="text-sm bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-bold py-1.5 px-3 rounded-lg border border-indigo-200 transition">
+                                + Add Feature
+                            </button>
+                        </div>
+                        <div id="edit-features-container" class="space-y-3">
+                            <!-- Dynamic feature rows will be appended here -->
+                        </div>
+                    </div>
+
                     <div class="pt-4 flex justify-end space-x-3">
                         <button type="button" onclick="closeEditDetailsModal()" class="bg-gray-100 hover:bg-gray-200 text-gray-800 font-semibold px-4 py-2 rounded-lg text-sm transition">Cancel</button>
                         <button type="submit" class="bg-gray-900 hover:bg-black text-white font-semibold px-4 py-2 rounded-lg text-sm transition">Save Changes</button>
@@ -311,6 +325,14 @@
             document.getElementById('edit-original_price').value = product.original_price || '';
             document.getElementById('edit-description').value = product.description || '';
 
+            const featuresContainer = document.getElementById('edit-features-container');
+            featuresContainer.innerHTML = '';
+            if (product.features && product.features.length > 0) {
+                product.features.forEach(feature => {
+                    addEditFeatureRow(feature.name, feature.options.join(', '));
+                });
+            }
+
             document.getElementById('edit-details-modal').classList.remove('hidden');
         }
 
@@ -378,6 +400,27 @@
             document.getElementById(targetId).innerText = files.length > 0 
                 ? `${files.length} file(s) selected` 
                 : "No file chosen";
+        }
+
+        function addEditFeatureRow(name = '', options = '') {
+            const container = document.getElementById('edit-features-container');
+            const row = document.createElement('div');
+            row.className = 'flex items-start space-x-3 bg-gray-50 p-3 rounded-lg border border-gray-200';
+            
+            // Escape quotes in values to prevent HTML injection issues
+            const safeName = name.replace(/"/g, '&quot;');
+            const safeOptions = options.replace(/"/g, '&quot;');
+            
+            row.innerHTML = `
+                <div class="flex-1">
+                    <input type="text" name="feature_names[]" value="${safeName}" placeholder="Feature Name (e.g. Internal Memory)" class="w-full text-sm border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded shadow-sm mb-2" required>
+                    <input type="text" name="feature_options[]" value="${safeOptions}" placeholder="Options (comma separated, e.g. 1 TB, 2 TB)" class="w-full text-sm border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded shadow-sm" required>
+                </div>
+                <button type="button" onclick="this.parentElement.remove()" class="text-red-500 hover:text-red-700 p-2 focus:outline-none bg-white rounded border border-gray-200 shadow-sm mt-1">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+                </button>
+            `;
+            container.appendChild(row);
         }
     </script>
 </x-app-layout>

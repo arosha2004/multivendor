@@ -19,10 +19,12 @@ class Product extends Model
         'delivery_badge',
         'description',
         'images',
+        'features',
     ];
 
     protected $casts = [
         'images' => 'array',
+        'features' => 'array',
     ];
 
     public function vendor()

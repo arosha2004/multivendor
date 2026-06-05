@@ -136,6 +136,20 @@
                                     <textarea id="description" name="description" rows="3" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-lg shadow-sm mt-1.5 block w-full"></textarea>
                                     <x-input-error :messages="$errors->get('description')" class="mt-2" />
                                 </div>
+                                <div class="md:col-span-2 border-t border-gray-100 pt-4 mt-2">
+                                    <div class="flex items-center justify-between mb-3">
+                                        <div>
+                                            <h4 class="font-bold text-gray-800 text-base">Additional Features</h4>
+                                            <p class="text-xs text-gray-500">Add dynamic options like "Internal Memory: 1TB, 2TB" or "Model Name: iPhone 17 Pro"</p>
+                                        </div>
+                                        <button type="button" onclick="addFeatureRow()" class="text-sm bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-bold py-1.5 px-3 rounded-lg border border-indigo-200 transition">
+                                            + Add Feature
+                                        </button>
+                                    </div>
+                                    <div id="features-container" class="space-y-3">
+                                        <!-- Dynamic feature rows will be appended here -->
+                                    </div>
+                                </div>
                             </div>
                             <div class="mt-6">
                                 <button type="submit" class="bg-gray-900 text-white font-bold py-2.5 px-6 rounded-lg text-sm hover:bg-black transition uppercase tracking-wider shadow-md">
@@ -387,6 +401,22 @@
                 document.getElementById(targetId).innerText = files.length > 0 
                     ? `${files.length} file(s) selected` 
                     : "No file chosen";
+            }
+
+            function addFeatureRow() {
+                const container = document.getElementById('features-container');
+                const row = document.createElement('div');
+                row.className = 'flex items-start space-x-3 bg-gray-50 p-3 rounded-lg border border-gray-200';
+                row.innerHTML = `
+                    <div class="flex-1">
+                        <input type="text" name="feature_names[]" placeholder="Feature Name (e.g. Internal Memory)" class="w-full text-sm border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded shadow-sm mb-2" required>
+                        <input type="text" name="feature_options[]" placeholder="Options (comma separated, e.g. 1 TB, 2 TB)" class="w-full text-sm border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded shadow-sm" required>
+                    </div>
+                    <button type="button" onclick="this.parentElement.remove()" class="text-red-500 hover:text-red-700 p-2 focus:outline-none bg-white rounded border border-gray-200 shadow-sm mt-1">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+                    </button>
+                `;
+                container.appendChild(row);
             }
         </script>
     @else

@@ -39,6 +39,26 @@ class ProductController extends Controller
         $isBestSeller = rand(0, 100) > 70; // 30% chance to be best seller
         $deliveryBadge = 'GET IT NOW';
 
+        $features = [];
+        if ($request->has('feature_names') && $request->has('feature_options')) {
+            $names = $request->input('feature_names');
+            $options = $request->input('feature_options');
+            if (is_array($names) && is_array($options)) {
+                foreach ($names as $index => $name) {
+                    if (!empty($name) && !empty($options[$index])) {
+                        $opts = array_map('trim', explode(',', $options[$index]));
+                        $opts = array_filter($opts, fn($value) => !is_null($value) && $value !== '');
+                        if (!empty($opts)) {
+                            $features[] = [
+                                'name' => $name,
+                                'options' => array_values($opts)
+                            ];
+                        }
+                    }
+                }
+            }
+        }
+
         auth()->user()->products()->create([
             'title' => $request->title,
             'category' => $request->category,
@@ -51,6 +71,7 @@ class ProductController extends Controller
             'reviews_count' => $reviewsCount,
             'is_best_seller' => $isBestSeller,
             'delivery_badge' => $deliveryBadge,
+            'features' => $features,
         ]);
 
         return redirect()->route('dashboard')->with('success', 'Product added successfully.');
@@ -177,12 +198,33 @@ class ProductController extends Controller
             'description' => 'nullable|string',
         ]);
 
+        $features = [];
+        if ($request->has('feature_names') && $request->has('feature_options')) {
+            $names = $request->input('feature_names');
+            $options = $request->input('feature_options');
+            if (is_array($names) && is_array($options)) {
+                foreach ($names as $index => $name) {
+                    if (!empty($name) && !empty($options[$index])) {
+                        $opts = array_map('trim', explode(',', $options[$index]));
+                        $opts = array_filter($opts, fn($value) => !is_null($value) && $value !== '');
+                        if (!empty($opts)) {
+                            $features[] = [
+                                'name' => $name,
+                                'options' => array_values($opts)
+                            ];
+                        }
+                    }
+                }
+            }
+        }
+
         $product->update([
             'title' => $request->title,
             'category' => $request->category,
             'price' => $request->price,
             'original_price' => $request->original_price,
             'description' => $request->description,
+            'features' => $features,
         ]);
 
         return redirect()->back()->with('success', 'Product details updated successfully.');

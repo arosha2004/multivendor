@@ -16,7 +16,7 @@
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-white flex flex-col">
-            @if(!request()->routeIs('dashboard') && !request()->is('/') && !request()->routeIs('vendor.products'))
+            @if(!request()->routeIs('dashboard') && !request()->is('/') && !request()->routeIs('vendor.products') && !request()->routeIs('buyer.home'))
                 @include('layouts.navigation')
             @endif
 

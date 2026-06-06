@@ -14,6 +14,15 @@ Route::get('/', function () {
     return view('dashboard', compact('products'));
 });
 
+// Buyer homepage — always shows the buyer-facing storefront, even for vendors
+Route::get('/buyer-home', function () {
+    $products = Product::latest()->get();
+    return view('dashboard', [
+        'products' => $products,
+        'force_buyer_view' => true
+    ]);
+})->middleware('auth')->name('buyer.home');
+
 Route::get('/dashboard', function () {
     $user = auth()->user();
     if ($user->role === 'vendor') {

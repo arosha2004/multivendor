@@ -1,5 +1,5 @@
 <x-app-layout>
-    @if(auth()->check() && auth()->user()->role === 'vendor')
+    @if(auth()->check() && auth()->user()->role === 'vendor' && !isset($force_buyer_view))
         {{-- Custom Vendor Navbar --}}
         <div class="bg-white border-b border-gray-200 shadow-sm relative z-50">
             <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
@@ -26,7 +26,7 @@
                         </a>
 
                         <!-- Switch to Buyer View -->
-                        <a href="{{ url('/') }}" class="flex bg-white hover:bg-gray-50 text-gray-700 px-4 py-2 rounded-full text-sm font-bold transition items-center space-x-2 border border-gray-250 shadow-sm">
+                        <a href="{{ route('buyer.home') }}" class="flex bg-white hover:bg-gray-50 text-gray-700 px-4 py-2 rounded-full text-sm font-bold transition items-center space-x-2 border border-gray-250 shadow-sm">
                             <svg class="w-4 h-4 text-gray-550" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
                             </svg>
@@ -509,6 +509,9 @@
                         <span>Cart</span>
                     </div>
                     @auth
+                    @if(auth()->user()->role === 'vendor')
+                        <a href="{{ route('dashboard') }}" class="flex items-center cursor-pointer text-[#e65c00] hover:text-orange-700 transition font-semibold mr-4 border border-[#e65c00] rounded-full px-3 py-1">Vendor Dashboard</a>
+                    @endif
                     <form method="POST" action="{{ route('logout') }}" class="inline">
                         @csrf
                         <button type="submit" class="flex items-center cursor-pointer text-[#e65c00] hover:text-red-750 transition font-semibold">Log out</button>

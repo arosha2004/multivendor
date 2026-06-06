@@ -41,6 +41,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     
     Route::post('/products', [ProductController::class, 'store'])->name('products.store');
+    Route::post('/products/upload-image', [ProductController::class, 'uploadImage'])->name('products.upload_image');
     Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');
     Route::get('/vendor/{id}/store', [ProductController::class, 'vendorStore'])->name('vendor.store');
     Route::patch('/products/{product}/cover', [ProductController::class, 'updateCover'])->name('products.update-cover');

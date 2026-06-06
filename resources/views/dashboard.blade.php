@@ -74,7 +74,7 @@
                                 <span class="font-semibold">{{ session('success') }}</span>
                             </div>
                         @endif
-                        <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
+                        <form id="add-product-form" action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div>
@@ -131,12 +131,13 @@
                                     </div>
                                     <x-input-error :messages="$errors->get('additional_images')" class="mt-2" />
                                 </div>
-                                <div class="md:col-span-2">
+                                <div class="md:col-span-2 mb-6">
                                     <x-input-label for="description" value="Product Description" class="font-semibold text-gray-700" />
-                                    <textarea id="description" name="description" rows="3" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-lg shadow-sm mt-1.5 block w-full"></textarea>
+                                    <input type="hidden" name="description" id="description_hidden">
+                                    <div id="quill-editor" class="mt-1.5 bg-white rounded-b-lg border-gray-300" style="min-height: 160px; height: auto;"></div>
                                     <x-input-error :messages="$errors->get('description')" class="mt-2" />
                                 </div>
-                                <div class="md:col-span-2 border-t border-gray-100 pt-4 mt-2">
+                                <div class="md:col-span-2 border-t border-gray-100 pt-6 mt-4">
                                     <div class="flex items-center justify-between mb-3">
                                         <div>
                                             <h4 class="font-bold text-gray-800 text-base">Additional Features</h4>
@@ -332,7 +333,66 @@
             </div>
         </div>
 
+        <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+        <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
         <script>
+            var quill = new Quill('#quill-editor', {
+                theme: 'snow',
+                modules: {
+                    toolbar: {
+                        container: [
+                            [{ 'header': [1, 2, 3, false] }],
+                            ['bold', 'italic', 'underline'],
+                            [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                            ['link', 'image']
+                        ],
+                        handlers: {
+                            image: imageHandler
+                        }
+                    }
+                }
+            });
+
+            function imageHandler() {
+                var input = document.createElement('input');
+                input.setAttribute('type', 'file');
+                input.setAttribute('accept', 'image/*');
+                input.click();
+
+                input.onchange = function() {
+                    var file = input.files[0];
+                    if (file) {
+                        var formData = new FormData();
+                        formData.append('image', file);
+                        formData.append('_token', document.querySelector('meta[name="csrf-token"]').content);
+
+                        fetch('{{ route("products.upload_image") }}', {
+                            method: 'POST',
+                            body: formData
+                        })
+                        .then(response => response.json())
+                        .then(result => {
+                            if (result.url) {
+                                var range = quill.getSelection(true);
+                                quill.insertEmbed(range.index, 'image', result.url);
+                            } else {
+                                alert('Upload failed');
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            alert('Upload failed');
+                        });
+                    }
+                };
+            }
+
+            document.getElementById('add-product-form').addEventListener('submit', function(e) {
+                var html = quill.root.innerHTML;
+                if(html === '<p><br></p>') html = '';
+                document.getElementById('description_hidden').value = html;
+            });
+            
             const productsData = @json($products->keyBy('id'));
 
             function openManageImagesModal(productId) {

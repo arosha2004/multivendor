@@ -75,7 +75,11 @@
         .breadcrumb-link:hover { text-decoration: underline; }
 
         /* Description prose */
-        .description-body { line-height: 1.75; color: #374151; font-size: 14px; white-space: pre-wrap; }
+        .description-body { line-height: 1.75; color: #374151; font-size: 14px; }
+        .description-body p { margin-bottom: 0.75rem; }
+        .description-body b, .description-body strong { font-weight: 700; }
+        .description-body i, .description-body em { font-style: italic; }
+        .description-body u { text-decoration: underline; }
     </style>
 </head>
 <body>
@@ -319,7 +323,7 @@
                             <svg class="w-4 h-4 mr-1.5 text-[#243BB9]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
                             Product Description
                         </h2>
-                        <div class="description-body bg-gray-50 rounded-lg p-4 border border-gray-100 text-gray-700">{{ $product->description }}</div>
+                        <div class="description-body bg-gray-50 rounded-lg p-4 border border-gray-100 text-gray-700">{!! $product->description !!}</div>
                     </div>
                     @endif
 

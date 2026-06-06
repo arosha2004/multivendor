@@ -245,4 +245,21 @@ class ProductController extends Controller
         $products = $vendor->products()->latest()->get();
         return view('vendor.store', compact('vendor', 'products'));
     }
+
+    public function uploadImage(Request $request)
+    {
+        if (auth()->user()->role !== 'vendor') {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+        ]);
+
+        $path = $request->file('image')->store('products', 'public');
+
+        return response()->json([
+            'url' => asset('storage/' . $path)
+        ]);
+    }
 }

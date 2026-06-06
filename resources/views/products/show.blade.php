@@ -118,10 +118,17 @@
                 </svg> 
                 <span>Orders</span>
             </a>
-            <div class="flex items-center space-x-1 border-l border-black/10 pl-6 cursor-pointer hover:text-gray-700 transition">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+            <a href="{{ route('cart.index') }}" class="flex items-center space-x-1 border-l border-black/10 pl-6 cursor-pointer hover:text-gray-700 transition relative">
+                <div class="relative">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                    @if(session('cart') && count(session('cart')) > 0)
+                        <span class="absolute -top-1.5 -right-2 bg-red-500 text-white text-[9px] font-bold px-1 py-0.5 rounded-full leading-none min-w-[14px] text-center border border-white">
+                            {{ array_reduce(session('cart'), function($carry, $item) { return $carry + $item['quantity']; }, 0) }}
+                        </span>
+                    @endif
+                </div>
                 <span>Cart</span>
-            </div>
+            </a>
             @auth
             <form method="POST" action="{{ route('logout') }}" class="inline border-l border-black/10 pl-6">
                 @csrf
@@ -147,6 +154,13 @@
 
     {{-- ======== MAIN CONTENT ======== --}}
     <div class="max-w-[1280px] mx-auto px-4 py-6">
+
+        @if(session('success'))
+            <div class="mb-6 text-green-700 bg-green-50 border border-green-200 p-4 rounded-lg flex items-center shadow-sm">
+                <svg class="w-5 h-5 mr-2 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m6 2a9 9 0 1 1-18 0 9 9 0 0 1 18 0z"></path></svg>
+                <span class="font-semibold">{{ session('success') }}</span>
+            </div>
+        @endif
 
         {{-- Breadcrumb --}}
         <nav class="flex items-center space-x-1.5 text-xs text-gray-500 mb-5">
@@ -392,9 +406,12 @@
                         </div>
                     </div>
 
-                    <button class="btn-cart w-full text-white font-bold py-3 rounded-xl text-sm tracking-wide shadow-md">
-                        🛒 ADD TO CART
-                    </button>
+                    <form action="{{ route('cart.add', $product) }}" method="POST">
+                        @csrf
+                        <button type="submit" class="btn-cart w-full text-white font-bold py-3 rounded-xl text-sm tracking-wide shadow-md">
+                            🛒 ADD TO CART
+                        </button>
+                    </form>
                     <button class="w-full border-2 border-[#243BB9] text-[#243BB9] font-bold py-3 rounded-xl text-sm hover:bg-blue-50 transition">
                         ⚡ BUY NOW
                     </button>

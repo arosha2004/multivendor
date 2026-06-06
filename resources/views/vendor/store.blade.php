@@ -23,6 +23,20 @@
                 <a href="{{ route('dashboard') }}" class="flex items-center cursor-pointer hover:text-gray-700 transition space-x-1.5">
                     <span>Back to Home</span>
                 </a>
+                
+                <a href="{{ route('cart.index') }}" class="flex items-center space-x-1.5 hover:text-gray-700 transition relative">
+                    <div class="relative">
+                        <svg class="w-5 h-5 text-gray-800" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
+                        </svg> 
+                        @if(session('cart') && count(session('cart')) > 0)
+                            <span class="absolute -top-1.5 -right-2 bg-red-500 text-white text-[9px] font-bold px-1 py-0.5 rounded-full leading-none min-w-[14px] text-center border border-white">
+                                {{ array_reduce(session('cart'), function($carry, $item) { return $carry + $item['quantity']; }, 0) }}
+                            </span>
+                        @endif
+                    </div>
+                    <span>Cart</span>
+                </a>
             </div>
         </div>
     </div>
@@ -39,6 +53,13 @@
                 <p class="text-gray-500 text-sm">Showing all {{ $products->count() }} products from this seller</p>
             </div>
         </div>
+
+        @if(session('success'))
+            <div class="mb-6 text-green-700 bg-green-50 border border-green-200 p-4 rounded-lg flex items-center shadow-sm">
+                <svg class="w-5 h-5 mr-2 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m6 2a9 9 0 1 1-18 0 9 9 0 0 1 18 0z"></path></svg>
+                <span class="font-semibold">{{ session('success') }}</span>
+            </div>
+        @endif
         
         @if($products->isEmpty())
             <div class="text-center py-12 text-gray-500">
@@ -54,6 +75,14 @@
                                     Best Seller
                                 </div>
                             @endif
+
+                            <!-- Add to Cart Icon -->
+                            <form action="{{ route('cart.add', $product) }}" method="POST" class="absolute top-2 right-2 z-20">
+                                @csrf
+                                <button type="submit" onclick="event.preventDefault(); event.stopPropagation(); this.closest('form').submit();" class="bg-white rounded-full w-8 h-8 flex items-center justify-center shadow border border-gray-100 cursor-pointer hover:bg-gray-50 text-gray-500 hover:text-[#3866DF] transition-colors focus:outline-none" title="Add to Cart">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                                </button>
+                            </form>
 
                             <div class="relative pt-[100%] w-full mb-3 bg-white rounded flex items-center justify-center">
                                 <img src="{{ asset('storage/' . $product->image_path) }}" alt="{{ $product->title }}" class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 max-w-full max-h-full object-contain p-2 transition-transform duration-500 group-hover:scale-105">
@@ -87,6 +116,7 @@
                                         </div>
                                         <span class="text-gray-400 text-xs ml-1.5">({{ $product->reviews_count > 1000 ? round($product->reviews_count/1000, 1).'K' : $product->reviews_count }})</span>
                                     </div>
+
                                 </div>
                             </div>
                         </div>

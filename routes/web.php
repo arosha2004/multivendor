@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\CartController;
 use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 
@@ -51,6 +52,11 @@ Route::middleware('auth')->group(function () {
     
     Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
 });
+
+Route::post('/cart/add/{product}', [CartController::class, 'add'])->name('cart.add');
+Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+Route::patch('/cart/{id}', [CartController::class, 'update'])->name('cart.update');
+Route::delete('/cart/{id}', [CartController::class, 'remove'])->name('cart.remove');
 
 require __DIR__.'/auth.php';
 

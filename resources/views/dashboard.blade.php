@@ -502,12 +502,19 @@
                         <span>Wishlist</span>
                     </div>
                     <!-- Cart -->
-                    <div class="flex items-center cursor-pointer hover:text-gray-700 transition space-x-1.5">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
-                        </svg> 
+                    <a href="{{ route('cart.index') }}" class="flex items-center cursor-pointer hover:text-gray-700 transition space-x-1.5 relative">
+                        <div class="relative">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
+                            </svg>
+                            @if(session('cart') && count(session('cart')) > 0)
+                                <span class="absolute -top-1.5 -right-2 bg-red-500 text-white text-[9px] font-bold px-1 py-0.5 rounded-full leading-none min-w-[14px] text-center border border-white">
+                                    {{ array_reduce(session('cart'), function($carry, $item) { return $carry + $item['quantity']; }, 0) }}
+                                </span>
+                            @endif
+                        </div>
                         <span>Cart</span>
-                    </div>
+                    </a>
                     @auth
                     @if(auth()->user()->role === 'vendor')
                         <a href="{{ route('dashboard') }}" class="flex items-center cursor-pointer text-[#e65c00] hover:text-orange-700 transition font-semibold mr-4 border border-[#e65c00] rounded-full px-3 py-1">Vendor Dashboard</a>
@@ -573,6 +580,12 @@
 
         <!-- Main Content -->
         <div class="max-w-[1400px] mx-auto p-4 md:p-8 bg-[#FCFBF4] min-h-screen border-l border-r border-gray-200">
+            @if(session('success'))
+                <div class="mb-6 text-green-700 bg-green-50 border border-green-200 p-4 rounded-lg flex items-center shadow-sm">
+                    <svg class="w-5 h-5 mr-2 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m6 2a9 9 0 1 1-18 0 9 9 0 0 1 18 0z"></path></svg>
+                    <span class="font-semibold">{{ session('success') }}</span>
+                </div>
+            @endif
             <h2 class="text-xl md:text-2xl font-bold mb-6 text-gray-850">Recommended for you</h2>
             
             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3">
@@ -586,10 +599,13 @@
                                 </div>
                             @endif
 
-                            <!-- Wishlist Icon -->
-                            <div class="absolute top-2 right-2 bg-white rounded-full p-1.5 shadow border border-gray-100 opacity-0 group-hover:opacity-100 transition-opacity z-10 cursor-pointer hover:bg-gray-50 text-gray-400 hover:text-red-500">
-                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
-                            </div>
+                            <!-- Add to Cart Icon -->
+                            <form action="{{ route('cart.add', $product) }}" method="POST" class="absolute top-2 right-2 z-20">
+                                @csrf
+                                <button type="submit" onclick="event.preventDefault(); event.stopPropagation(); this.closest('form').submit();" class="bg-white rounded-full w-8 h-8 flex items-center justify-center shadow border border-gray-100 cursor-pointer hover:bg-gray-50 text-gray-500 hover:text-[#3866DF] transition-colors focus:outline-none" title="Add to Cart">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                                </button>
+                            </form>
 
                             <!-- Image -->
                             <div class="relative pt-[100%] w-full mb-3 bg-white rounded flex items-center justify-center">
@@ -627,7 +643,7 @@
                                 
                                 <div class="mt-auto pt-2">
                                     @if($product->delivery_badge)
-                                        <div class="bg-[#243BB9] text-white text-[11px] font-bold px-2 py-1.5 rounded inline-flex w-full items-center justify-between tracking-wider shadow-sm group-hover:bg-[#1C2C8C] transition-colors">
+                                        <div class="bg-[#243BB9] text-white text-[11px] font-bold px-2 py-1.5 rounded inline-flex w-full items-center justify-between tracking-wider shadow-sm group-hover:bg-[#1C2C8C] transition-colors mb-2">
                                             <div class="flex items-center">
                                                 <svg class="w-3.5 h-3.5 mr-1 text-yellow-300" fill="currentColor" viewBox="0 0 20 20"><path d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z"></path></svg>
                                                 <span class="italic">{{ $product->delivery_badge }}</span>
@@ -635,6 +651,7 @@
                                             <svg class="w-4 h-4 text-white opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                                         </div>
                                     @endif
+
                                 </div>
                             </div>
                         </div>

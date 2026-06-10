@@ -21,14 +21,20 @@
             border-radius: 10px;
             background: #fff;
             flex-shrink: 0;
-            width: 110px;
-            height: 110px;
+            width: 70px;
+            height: 70px;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
             cursor: pointer;
             box-shadow: 0 1px 3px rgba(0,0,0,.06);
+        }
+        @media (min-width: 640px) {
+            .thumb-btn { width: 90px; height: 90px; }
+        }
+        @media (min-width: 1024px) {
+            .thumb-btn { width: 110px; height: 110px; }
         }
         .thumb-btn:hover  { border-color: #9ca3af; box-shadow: 0 2px 8px rgba(0,0,0,.12); }
         .thumb-btn.active { border-color: #243BB9; box-shadow: 0 0 0 3px rgba(36,59,185,.12); }
@@ -40,7 +46,7 @@
         #main-image-wrap {
             position: relative;
             width: 100%;
-            min-height: 480px;
+            min-height: 280px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -48,7 +54,15 @@
             cursor: zoom-in;
             background: #fff;
         }
-        #main-image-wrap img { transition: transform .4s ease; max-height: 480px; max-width: 100%; object-fit: contain; }
+        @media (min-width: 640px) {
+            #main-image-wrap { min-height: 380px; }
+        }
+        @media (min-width: 1024px) {
+            #main-image-wrap { min-height: 480px; }
+        }
+        #main-image-wrap img { transition: transform .4s ease; max-height: 280px; max-width: 100%; object-fit: contain; }
+        @media (min-width: 640px) { #main-image-wrap img { max-height: 380px; } }
+        @media (min-width: 1024px) { #main-image-wrap img { max-height: 480px; } }
         #main-image-wrap:hover img { transform: scale(1.05); }
 
         /* Delivery badge */
@@ -85,60 +99,93 @@
 <body>
 
     {{-- ======== YELLOW NAVBAR ======== --}}
-    <div class="bg-[#FEE000] py-4 px-4 sm:px-6 flex items-center justify-between shadow-sm" style="background-color:#FEE000;">
-        <div class="flex items-center space-x-6 shrink-0">
-            <a href="{{ route('dashboard') }}" class="text-3xl font-extrabold tracking-tighter text-black lowercase leading-none">emall</a>
-            <div class="hidden md:flex items-center text-sm font-semibold text-gray-900 cursor-pointer">
-                <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                Other • LK
-                <svg class="w-4 h-4 ml-1 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+    <div class="bg-[#FEE000] py-3 px-3 sm:px-6 shadow-sm" style="background-color:#FEE000;">
+        <div class="flex items-center justify-between gap-2">
+            <div class="flex items-center space-x-3 shrink-0">
+                <a href="{{ route('dashboard') }}" class="text-2xl sm:text-3xl font-extrabold tracking-tighter text-black lowercase leading-none">emall</a>
+                <div class="hidden md:flex items-center text-sm font-semibold text-gray-900 cursor-pointer">
+                    <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                    Other • LK
+                    <svg class="w-4 h-4 ml-1 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </div>
             </div>
-        </div>
 
-        {{-- Search --}}
-        <div class="flex-1 max-w-4xl mx-4 lg:mx-8">
-            <div class="w-full bg-white rounded-full flex items-center px-5 py-2.5 shadow-sm border border-transparent">
-                <svg class="h-5 w-5 text-slate-900 mr-3 shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-                <input type="text" placeholder="What are you looking for?" class="w-full bg-transparent border-none focus:ring-0 focus:outline-none p-0 text-gray-900 placeholder-[#5A738E] text-[15px] font-normal">
+            {{-- Search --}}
+            <div class="flex-1 min-w-0 max-w-4xl mx-2 sm:mx-4 lg:mx-8">
+                <div class="w-full bg-white rounded-full flex items-center px-3 sm:px-5 py-2 sm:py-2.5 shadow-sm border border-transparent">
+                    <svg class="h-4 w-4 sm:h-5 sm:w-5 text-slate-900 mr-2 sm:mr-3 shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    <input type="text" placeholder="Search..." class="w-full bg-transparent border-none focus:ring-0 focus:outline-none p-0 text-gray-900 placeholder-[#5A738E] text-sm font-normal">
+                </div>
             </div>
-        </div>
 
-        {{-- Right Nav --}}
-        <div class="hidden lg:flex items-center space-x-6 text-sm font-bold text-black shrink-0">
-            @guest
-                <a href="{{ route('login') }}" class="flex items-center space-x-1 hover:text-gray-700 transition">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
-                    <span>Log in</span>
-                </a>
-            @else
-                <a href="{{ route('profile.edit') }}" class="flex items-center space-x-1 hover:text-gray-700 transition">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
-                    <span class="truncate max-w-[150px]">{{ Auth::user()->name }}</span>
-                </a>
-            @endguest
-            <a href="{{ route('orders.index') }}" class="flex items-center space-x-1 border-l border-black/10 pl-6 hover:text-gray-700 transition">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="m21 7.5-9-5.25L3 7.5m18 0-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" />
-                </svg> 
-                <span>Orders</span>
-            </a>
-            <a href="{{ route('cart.index') }}" class="flex items-center space-x-1 border-l border-black/10 pl-6 cursor-pointer hover:text-gray-700 transition relative">
-                <div class="relative">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+            {{-- Mobile: Cart + hamburger --}}
+            <div class="flex items-center space-x-1.5 lg:hidden shrink-0">
+                <a href="{{ route('cart.index') }}" class="relative p-1.5">
+                    <svg class="w-6 h-6 text-gray-900" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
                     @if(session('cart') && count(session('cart')) > 0)
-                        <span class="absolute -top-1.5 -right-2 bg-red-500 text-white text-[9px] font-bold px-1 py-0.5 rounded-full leading-none min-w-[14px] text-center border border-white">
+                        <span class="absolute -top-0.5 -right-0.5 bg-red-500 text-white text-[8px] font-bold px-1 py-0.5 rounded-full leading-none min-w-[14px] text-center border border-yellow-300">
                             {{ array_reduce(session('cart'), function($carry, $item) { return $carry + $item['quantity']; }, 0) }}
                         </span>
                     @endif
-                </div>
-                <span>Cart</span>
-            </a>
-            @auth
-            <form method="POST" action="{{ route('logout') }}" class="inline border-l border-black/10 pl-6">
-                @csrf
-                <button type="submit" class="text-red-600 hover:text-red-800 font-bold transition">Log out</button>
-            </form>
-            @endauth
+                </a>
+                <button onclick="document.getElementById('product-mobile-menu').classList.toggle('hidden')" class="p-1.5 rounded-lg text-gray-800 hover:bg-yellow-400 transition">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                </button>
+            </div>
+
+            {{-- Right Nav (desktop) --}}
+            <div class="hidden lg:flex items-center space-x-6 text-sm font-bold text-black shrink-0">
+                @guest
+                    <a href="{{ route('login') }}" class="flex items-center space-x-1 hover:text-gray-700 transition">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                        <span>Log in</span>
+                    </a>
+                @else
+                    <a href="{{ route('profile.edit') }}" class="flex items-center space-x-1 hover:text-gray-700 transition">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                        <span class="truncate max-w-[150px]">{{ Auth::user()->name }}</span>
+                    </a>
+                @endguest
+                <a href="{{ route('orders.index') }}" class="flex items-center space-x-1 border-l border-black/10 pl-6 hover:text-gray-700 transition">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m21 7.5-9-5.25L3 7.5m18 0-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" />
+                    </svg> 
+                    <span>Orders</span>
+                </a>
+                <a href="{{ route('cart.index') }}" class="flex items-center space-x-1 border-l border-black/10 pl-6 cursor-pointer hover:text-gray-700 transition relative">
+                    <div class="relative">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                        @if(session('cart') && count(session('cart')) > 0)
+                            <span class="absolute -top-1.5 -right-2 bg-red-500 text-white text-[9px] font-bold px-1 py-0.5 rounded-full leading-none min-w-[14px] text-center border border-white">
+                                {{ array_reduce(session('cart'), function($carry, $item) { return $carry + $item['quantity']; }, 0) }}
+                            </span>
+                        @endif
+                    </div>
+                    <span>Cart</span>
+                </a>
+                @auth
+                <form method="POST" action="{{ route('logout') }}" class="inline border-l border-black/10 pl-6">
+                    @csrf
+                    <button type="submit" class="text-red-600 hover:text-red-800 font-bold transition">Log out</button>
+                </form>
+                @endauth
+            </div>
+        </div>
+        {{-- Mobile dropdown --}}
+        <div id="product-mobile-menu" class="hidden lg:hidden mt-2 pt-2 border-t border-yellow-400 space-y-1">
+            @guest
+                <a href="{{ route('login') }}" class="flex items-center space-x-2 px-3 py-2 rounded-lg bg-black/5 text-sm font-bold text-gray-900">Log in</a>
+                <a href="{{ route('register') }}" class="flex items-center space-x-2 px-3 py-2 rounded-lg bg-black/5 text-sm font-bold text-[#e65c00]">Sign Up</a>
+            @else
+                <a href="{{ route('profile.edit') }}" class="flex items-center space-x-2 px-3 py-2 rounded-lg bg-black/5 text-sm font-bold text-gray-900">{{ Auth::user()->name }}</a>
+                <a href="{{ route('orders.index') }}" class="flex items-center space-x-2 px-3 py-2 rounded-lg bg-black/5 text-sm font-bold text-gray-900">Orders</a>
+                @auth
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit" class="w-full flex items-center px-3 py-2 rounded-lg bg-black/5 text-sm font-bold text-red-700 text-left">Log out</button>
+                </form>
+                @endauth
+            @endguest
         </div>
     </div>
 
@@ -175,8 +222,8 @@
             <span class="text-gray-700 font-medium truncate max-w-[300px]">{{ $product->title }}</span>
         </nav>
 
-        {{-- Product Layout: 3 columns --}}
-        <div class="flex flex-col lg:flex-row gap-6">
+        {{-- Product Layout: stacks on mobile, 3 columns on lg --}}
+        <div class="flex flex-col lg:flex-row gap-4 sm:gap-6">
 
             {{-- ===== LEFT: Image Gallery ===== --}}
             @php

@@ -11,10 +11,10 @@
 
     <!-- Top Yellow Header mimicking emall -->
     <div class="bg-[#FEE000] w-full relative z-50 shadow-sm" style="background-color: #FEE000;">
-        <div class="max-w-[1400px] mx-auto px-4 sm:px-6 flex items-center justify-between py-3.5">
-            <div class="flex items-center space-x-5 shrink-0">
+        <div class="max-w-[1400px] mx-auto px-3 sm:px-6 flex items-center justify-between py-3">
+            <div class="flex items-center space-x-3 shrink-0">
                 <!-- emall Logo -->
-                <a href="{{ route('dashboard') }}" class="text-3xl sm:text-4xl font-extrabold tracking-tighter text-black lowercase leading-none hover:opacity-85 transition">emall</a>
+                <a href="{{ route('dashboard') }}" class="text-2xl sm:text-3xl font-extrabold tracking-tighter text-black lowercase leading-none hover:opacity-85 transition">emall</a>
                 <!-- Location -->
                 <div class="hidden md:flex items-center text-sm font-semibold text-gray-900 cursor-pointer space-x-1">
                     <svg class="w-4 h-4 text-gray-800" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -22,23 +22,24 @@
                         <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
                     </svg>
                     <span class="text-xs sm:text-sm">Other • LK</span>
-                    <svg class="w-3.5 h-3.5 text-gray-650" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-                    </svg>
                 </div>
             </div>
 
             <!-- Top Right Nav -->
-            <div class="hidden lg:flex items-center space-x-6 text-sm font-semibold text-gray-900 shrink-0">
-                <a href="{{ route('dashboard') }}" class="flex items-center cursor-pointer hover:text-gray-700 transition space-x-1.5">
+            <div class="flex items-center space-x-4 text-sm font-semibold text-gray-900 shrink-0">
+                <a href="{{ route('dashboard') }}" class="hidden sm:flex items-center cursor-pointer hover:text-gray-700 transition space-x-1.5">
                     <span>Continue Shopping</span>
+                </a>
+                <!-- Mobile: back + hamburger -->
+                <a href="{{ route('dashboard') }}" class="sm:hidden flex items-center cursor-pointer text-gray-800 transition">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"/></svg>
                 </a>
             </div>
         </div>
     </div>
 
     <!-- Main Content -->
-    <div class="max-w-[1400px] mx-auto p-4 md:p-8 bg-[#FCFBF4] min-h-screen border-l border-r border-gray-200">
+    <div class="max-w-[1400px] mx-auto p-3 sm:p-4 md:p-8 bg-[#FCFBF4] min-h-screen border-l border-r border-gray-200">
         <h2 class="text-2xl md:text-3xl font-bold mb-6 text-gray-850">Shopping Cart</h2>
         
         @if(session('success'))
@@ -123,8 +124,7 @@
                                     </div>
                                 </div>
 
-                                <!-- Actions Bottom Row -->
-                                <div class="mt-4 flex items-center justify-between">
+                        <div class="mt-4 flex flex-wrap items-center gap-2 justify-between">
                                     <!-- Quantity -->
                                     <div class="flex items-center border border-[#E2E5F1] rounded">
                                         <form action="{{ route('cart.update', $id) }}" method="POST" class="h-8">
@@ -151,7 +151,7 @@
                                     </div>
 
                                     <!-- Right Actions -->
-                                    <div class="flex items-center space-x-2">
+                                    <div class="flex flex-wrap items-center gap-2">
                                         <button class="flex items-center space-x-1.5 px-3 py-1.5 border border-[#E2E5F1] rounded text-[#404553] text-[12px] font-medium hover:bg-gray-50 transition">
                                             <svg class="w-3.5 h-3.5 text-[#7E859B]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"></path></svg>
                                             <span>Move to Wishlist</span>

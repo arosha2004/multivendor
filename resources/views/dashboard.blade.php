@@ -5,60 +5,83 @@
             <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex items-center justify-between h-16">
                     <!-- Left: Logo & Title -->
-                    <div class="flex items-center space-x-6">
-                        <a href="{{ route('dashboard') }}" class="text-3xl font-extrabold tracking-tighter text-black lowercase leading-none hover:opacity-80 transition">emall</a>
-                        <div class="h-6 w-px bg-gray-200"></div>
-                        <div class="flex items-center">
+                    <div class="flex items-center space-x-3 sm:space-x-6">
+                        <a href="{{ route('dashboard') }}" class="text-2xl sm:text-3xl font-extrabold tracking-tighter text-black lowercase leading-none hover:opacity-80 transition">emall</a>
+                        <div class="hidden sm:block h-6 w-px bg-gray-200"></div>
+                        <div class="hidden sm:flex items-center">
                             <span class="bg-gray-900 text-white text-xs font-bold px-3 py-1 rounded-md uppercase tracking-wider shadow-sm">
                                 Vendor Dashboard
                             </span>
                         </div>
                     </div>
                     
-                    <!-- Right: Actions -->
-                    <div class="flex items-center space-x-4">
+                    <!-- Right: Actions (desktop) -->
+                    <div class="hidden md:flex items-center space-x-3">
                         <!-- My Catalog -->
-                        <a href="{{ route('vendor.products') }}" class="flex bg-white hover:bg-gray-50 text-gray-700 px-4 py-2 rounded-full text-sm font-bold transition items-center space-x-2 border border-gray-250 shadow-sm">
-                            <svg class="w-4 h-4 text-gray-550" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <a href="{{ route('vendor.products') }}" class="flex bg-white hover:bg-gray-50 text-gray-700 px-3 py-2 rounded-full text-sm font-bold transition items-center space-x-2 border border-gray-200 shadow-sm">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 12h16.5m-16.5 3.75h16.5M3.75 19.5h16.5M5.625 4.5h12.75c.621 0 1.125.504 1.125 1.125v1.875c0 .621-.504 1.125-1.125 1.125H5.625A1.125 1.125 0 0 1 4.5 6.75V5.625c0-.621.504-1.125 1.125-1.125Z" />
                             </svg>
                             <span>My Catalog</span>
                         </a>
-
                         <!-- Switch to Buyer View -->
-                        <a href="{{ route('buyer.home') }}" class="flex bg-white hover:bg-gray-50 text-gray-700 px-4 py-2 rounded-full text-sm font-bold transition items-center space-x-2 border border-gray-250 shadow-sm">
-                            <svg class="w-4 h-4 text-gray-550" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <a href="{{ route('buyer.home') }}" class="flex bg-white hover:bg-gray-50 text-gray-700 px-3 py-2 rounded-full text-sm font-bold transition items-center space-x-2 border border-gray-200 shadow-sm">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
                             </svg>
                             <span>Buyer View</span>
                         </a>
-                        
                         <div class="h-6 w-px bg-gray-200"></div>
-                        
-                        <!-- Profile Edit -->
-                        <a href="{{ route('profile.edit') }}" class="p-2 rounded-full hover:bg-gray-100 text-gray-500 hover:text-gray-900 transition focus:outline-none focus:ring-2 focus:ring-gray-200" title="Edit Profile">
+                        <a href="{{ route('profile.edit') }}" class="p-2 rounded-full hover:bg-gray-100 text-gray-500 hover:text-gray-900 transition" title="Edit Profile">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
                             </svg>
                         </a>
-                        
-                        <!-- Logout -->
                         <form method="POST" action="{{ route('logout') }}" class="inline">
                             @csrf
-                            <button type="submit" class="p-2 rounded-full hover:bg-red-50 text-gray-500 hover:text-red-650 transition focus:outline-none focus:ring-2 focus:ring-red-100" title="Log Out">
+                            <button type="submit" class="p-2 rounded-full hover:bg-red-50 text-gray-500 hover:text-red-600 transition" title="Log Out">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15M12 9l-3 3m0 0 3 3m-3-3h12.75" />
                                 </svg>
                             </button>
                         </form>
                     </div>
+
+                    <!-- Mobile: Hamburger -->
+                    <button id="vendor-mobile-menu-btn" class="md:hidden p-2 rounded-lg text-gray-600 hover:bg-gray-100 transition" onclick="document.getElementById('vendor-mobile-drawer').classList.toggle('hidden')">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                    </button>
+                </div>
+            </div>
+            <!-- Mobile Drawer -->
+            <div id="vendor-mobile-drawer" class="hidden md:hidden bg-white border-t border-gray-200 px-4 py-3 space-y-2 shadow-md">
+                <a href="{{ route('vendor.products') }}" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg hover:bg-gray-50 text-sm font-semibold text-gray-700">
+                    <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 12h16.5m-16.5 3.75h16.5M3.75 19.5h16.5M5.625 4.5h12.75c.621 0 1.125.504 1.125 1.125v1.875c0 .621-.504 1.125-1.125 1.125H5.625A1.125 1.125 0 0 1 4.5 6.75V5.625c0-.621.504-1.125 1.125-1.125Z" /></svg>
+                    <span>My Catalog</span>
+                </a>
+                <a href="{{ route('buyer.home') }}" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg hover:bg-gray-50 text-sm font-semibold text-gray-700">
+                    <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" /></svg>
+                    <span>Buyer View</span>
+                </a>
+                <a href="{{ route('profile.edit') }}" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg hover:bg-gray-50 text-sm font-semibold text-gray-700">
+                    <svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" /></svg>
+                    <span>Edit Profile</span>
+                </a>
+                <div class="border-t border-gray-100 pt-2">
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit" class="w-full flex items-center space-x-3 px-3 py-2.5 rounded-lg hover:bg-red-50 text-sm font-semibold text-red-600">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15M12 9l-3 3m0 0 3 3m-3-3h12.75" /></svg>
+                            <span>Log Out</span>
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>
 
         {{-- VENDOR VIEW CONTENT --}}
-        <div class="max-w-[1400px] mx-auto p-4 md:p-8 bg-[#FCFBF4] min-h-screen border-l border-r border-gray-200">
-            <div class="space-y-8">
+        <div class="max-w-[1400px] mx-auto p-3 sm:p-4 md:p-8 bg-[#FCFBF4] min-h-screen border-l border-r border-gray-200">
+            <div class="space-y-6 sm:space-y-8">
                 <!-- Add Product Form -->
                 <div class="bg-white overflow-hidden shadow-sm rounded-xl border border-gray-250">
                     <div class="p-6 text-gray-900">
@@ -76,7 +99,7 @@
                         @endif
                         <form id="add-product-form" action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                                 <div>
                                     <x-input-label for="title" value="Product Title" class="font-semibold text-gray-700" />
                                     <x-text-input id="title" name="title" type="text" class="mt-1.5 block w-full focus:border-indigo-500 focus:ring-indigo-500 rounded-lg shadow-sm border-gray-300" required />
@@ -182,7 +205,7 @@
                                 <p class="text-sm mt-1 text-gray-400">Add a product above to get started.</p>
                             </div>
                         @else
-                            <div class="overflow-x-auto rounded-lg border border-gray-150">
+                            <div class="overflow-x-auto -mx-3 sm:mx-0 rounded-lg border border-gray-150">
                                 <table class="min-w-full divide-y divide-gray-200">
                                     <thead class="bg-gray-50">
                                         <tr>
@@ -494,10 +517,10 @@
 
         <!-- Top Yellow Header mimicking emall -->
         <div class="bg-[#FEE000] w-full relative z-50 shadow-sm" style="background-color: #FEE000;">
-            <div class="max-w-[1400px] mx-auto px-4 sm:px-6 flex items-center justify-between py-3.5">
-                <div class="flex items-center space-x-5 shrink-0">
+            <div class="max-w-[1400px] mx-auto px-3 sm:px-6 flex items-center justify-between py-3">
+                <div class="flex items-center space-x-2 sm:space-x-5 shrink-0">
                     <!-- emall Logo -->
-                    <a href="{{ route('dashboard') }}" class="text-3xl sm:text-4xl font-extrabold tracking-tighter text-black lowercase leading-none hover:opacity-85 transition">emall</a>
+                    <a href="{{ route('dashboard') }}" class="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tighter text-black lowercase leading-none hover:opacity-85 transition">emall</a>
                     <!-- Location -->
                     <div class="hidden md:flex items-center text-sm font-semibold text-gray-900 cursor-pointer space-x-1">
                         <svg class="w-4 h-4 text-gray-800" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -512,20 +535,34 @@
                 </div>
 
                 <!-- Search Bar -->
-                <div class="flex-1 max-w-[650px] mx-4 sm:mx-6 lg:mx-8">
-                    <div class="w-full bg-white rounded-full flex items-center px-4 py-2 border border-transparent focus-within:border-gray-200 overflow-hidden">
-                        <!-- Bold Search Icon -->
-                        <svg class="h-5 w-5 text-gray-805 mr-2.5 shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                <div class="flex-1 min-w-0 max-w-[650px] mx-2 sm:mx-4 lg:mx-8">
+                    <div class="w-full bg-white rounded-full flex items-center px-3 py-2 border border-transparent focus-within:border-gray-200 overflow-hidden">
+                        <svg class="h-4 w-4 sm:h-5 sm:w-5 text-gray-500 mr-2 shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 1110.5 2.5a7.5 7.5 0 0110.602 10.602z"></path>
                         </svg>
-                        <!-- Input Field -->
-                        <input type="text" placeholder="What are you looking for?" class="w-full bg-transparent border-none focus:border-none focus:ring-0 focus:ring-offset-0 focus:outline-none p-0 text-gray-900 placeholder-[#5A738E] text-sm sm:text-base font-normal shadow-none focus:shadow-none" style="border: none !important; outline: none !important; box-shadow: none !important;">
+                        <input type="text" placeholder="Search..." class="w-full bg-transparent border-none focus:border-none focus:ring-0 focus:ring-offset-0 focus:outline-none p-0 text-gray-900 placeholder-[#5A738E] text-sm font-normal shadow-none focus:shadow-none" style="border: none !important; outline: none !important; box-shadow: none !important;">
                     </div>
                 </div>
 
-                <!-- Top Right Nav -->
-                <div class="hidden lg:flex items-center space-x-6 text-sm font-semibold text-gray-900 shrink-0">
-                    <!-- Log in / Profile -->
+                <!-- Mobile: Cart icon + hamburger -->
+                <div class="flex items-center space-x-2 lg:hidden shrink-0">
+                    <a href="{{ route('cart.index') }}" class="relative p-1.5">
+                        <svg class="w-6 h-6 text-gray-900" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
+                        </svg>
+                        @if(session('cart') && count(session('cart')) > 0)
+                            <span class="absolute -top-0.5 -right-0.5 bg-red-500 text-white text-[8px] font-bold px-1 py-0.5 rounded-full leading-none min-w-[14px] text-center border border-yellow-300">
+                                {{ array_reduce(session('cart'), function($carry, $item) { return $carry + $item['quantity']; }, 0) }}
+                            </span>
+                        @endif
+                    </a>
+                    <button id="buyer-mobile-menu-btn" onclick="document.getElementById('buyer-mobile-drawer').classList.toggle('hidden')" class="p-1.5 rounded-lg text-gray-800 hover:bg-yellow-400 transition">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                    </button>
+                </div>
+
+                <!-- Top Right Nav (desktop) -->
+                <div class="hidden lg:flex items-center space-x-5 text-sm font-semibold text-gray-900 shrink-0">
                     @guest
                         <div class="flex items-center space-x-3">
                             <a href="{{ route('login') }}" class="flex items-center cursor-pointer hover:text-gray-700 transition space-x-1.5">
@@ -535,9 +572,7 @@
                                 <span>Log in</span>
                             </a>
                             <span class="text-gray-300">|</span>
-                            <a href="{{ route('register') }}" class="hover:text-orange-600 transition font-bold text-[#e65c00]">
-                                <span>Sign Up</span>
-                            </a>
+                            <a href="{{ route('register') }}" class="hover:text-orange-600 transition font-bold text-[#e65c00]"><span>Sign Up</span></a>
                         </div>
                     @else
                         <a href="{{ route('profile.edit') }}" class="flex items-center cursor-pointer hover:text-gray-700 transition space-x-1.5">
@@ -547,21 +582,18 @@
                             <span class="truncate max-w-[120px]">{{ Auth::user()->name }}</span>
                         </a>
                     @endguest
-                    <!-- Orders -->
                     <a href="{{ route('orders.index') }}" class="flex items-center cursor-pointer hover:text-gray-700 transition space-x-1.5">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="m21 7.5-9-5.25L3 7.5m18 0-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" />
                         </svg> 
                         <span>Orders</span>
                     </a>
-                    <!-- Wishlist -->
                     <div class="flex items-center cursor-pointer hover:text-gray-700 transition space-x-1.5">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
                         </svg> 
                         <span>Wishlist</span>
                     </div>
-                    <!-- Cart -->
                     <a href="{{ route('cart.index') }}" class="flex items-center cursor-pointer hover:text-gray-700 transition space-x-1.5 relative">
                         <div class="relative">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -577,14 +609,46 @@
                     </a>
                     @auth
                     @if(auth()->user()->role === 'vendor')
-                        <a href="{{ route('dashboard') }}" class="flex items-center cursor-pointer text-[#e65c00] hover:text-orange-700 transition font-semibold mr-4 border border-[#e65c00] rounded-full px-3 py-1">Vendor Dashboard</a>
+                        <a href="{{ route('dashboard') }}" class="flex items-center cursor-pointer text-[#e65c00] hover:text-orange-700 transition font-semibold border border-[#e65c00] rounded-full px-3 py-1">Vendor Dashboard</a>
                     @endif
                     <form method="POST" action="{{ route('logout') }}" class="inline">
                         @csrf
-                        <button type="submit" class="flex items-center cursor-pointer text-[#e65c00] hover:text-red-750 transition font-semibold">Log out</button>
+                        <button type="submit" class="flex items-center cursor-pointer text-[#e65c00] hover:text-red-700 transition font-semibold">Log out</button>
                     </form>
                     @endauth
                 </div>
+            </div>
+            <!-- Mobile Drawer -->
+            <div id="buyer-mobile-drawer" class="hidden lg:hidden bg-[#FEE000] border-t border-yellow-400 px-4 py-3 space-y-1 shadow-md">
+                @guest
+                    <a href="{{ route('login') }}" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg bg-black/5 hover:bg-black/10 text-sm font-bold text-gray-900">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" /></svg>
+                        <span>Log in</span>
+                    </a>
+                    <a href="{{ route('register') }}" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg bg-black/5 hover:bg-black/10 text-sm font-bold text-[#e65c00]">
+                        <span>Sign Up</span>
+                    </a>
+                @else
+                    <a href="{{ route('profile.edit') }}" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg bg-black/5 hover:bg-black/10 text-sm font-bold text-gray-900">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" /></svg>
+                        <span>{{ Auth::user()->name }}</span>
+                    </a>
+                    <a href="{{ route('orders.index') }}" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg bg-black/5 hover:bg-black/10 text-sm font-bold text-gray-900">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="m21 7.5-9-5.25L3 7.5m18 0-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" /></svg>
+                        <span>Orders</span>
+                    </a>
+                    @if(auth()->user()->role === 'vendor')
+                        <a href="{{ route('dashboard') }}" class="flex items-center space-x-3 px-3 py-2.5 rounded-lg bg-black/5 hover:bg-black/10 text-sm font-bold text-[#e65c00]">
+                            <span>Vendor Dashboard</span>
+                        </a>
+                    @endif
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit" class="w-full flex items-center space-x-3 px-3 py-2.5 rounded-lg bg-black/5 hover:bg-black/10 text-sm font-bold text-[#e65c00]">
+                            <span>Log out</span>
+                        </button>
+                    </form>
+                @endguest
             </div>
         </div>
 
@@ -639,7 +703,7 @@
         </script>
 
         <!-- Main Content -->
-        <div class="max-w-[1400px] mx-auto p-4 md:p-8 bg-[#FCFBF4] min-h-screen border-l border-r border-gray-200">
+        <div class="max-w-[1400px] mx-auto p-3 sm:p-4 md:p-8 bg-[#FCFBF4] min-h-screen border-l border-r border-gray-200">
             @if(session('success'))
                 <div class="mb-6 text-green-700 bg-green-50 border border-green-200 p-4 rounded-lg flex items-center shadow-sm">
                     <svg class="w-5 h-5 mr-2 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m6 2a9 9 0 1 1-18 0 9 9 0 0 1 18 0z"></path></svg>
@@ -648,7 +712,7 @@
             @endif
             <h2 class="text-xl md:text-2xl font-bold mb-6 text-gray-850">Recommended for you</h2>
             
-            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3">
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2 sm:gap-3">
                 @foreach($products as $product)
                     <a href="{{ route('products.show', $product) }}" class="block no-underline">
                         <div class="bg-white rounded-lg p-3 hover:shadow-xl transition-all duration-300 relative flex flex-col group border border-gray-200 cursor-pointer hover:-translate-y-1">

@@ -57,16 +57,16 @@
 
     {{-- ======== TOP YELLOW HEADER ======== --}}
     <div class="bg-[#FEE000] w-full sticky top-0 z-50 shadow-sm border-b border-yellow-400">
-        <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between py-3">
+        <div class="max-w-[1400px] mx-auto px-3 sm:px-6 lg:px-8 flex items-center justify-between py-2.5 sm:py-3">
             
             <!-- Logo Section -->
             <div class="flex items-center space-x-2 shrink-0">
-                <a href="{{ route('dashboard') }}" class="text-3xl font-extrabold tracking-tighter text-black lowercase leading-none hover:opacity-85 transition">emall</a>
-                <span class="text-sm font-semibold text-gray-800 tracking-wide lowercase mt-1.5 opacity-90">account</span>
+                <a href="{{ route('dashboard') }}" class="text-2xl sm:text-3xl font-extrabold tracking-tighter text-black lowercase leading-none hover:opacity-85 transition">emall</a>
+                <span class="hidden sm:block text-sm font-semibold text-gray-800 tracking-wide lowercase mt-1.5 opacity-90">account</span>
             </div>
 
-            <!-- Search Bar -->
-            <div class="flex-1 max-w-[650px] mx-6">
+            <!-- Search Bar (hidden on mobile) -->
+            <div class="hidden md:block flex-1 max-w-[650px] mx-6">
                 <div class="w-full bg-white rounded-full flex items-center px-4 py-2 border border-transparent shadow-sm focus-within:ring-2 focus-within:ring-yellow-400 transition">
                     <svg class="h-5 w-5 text-gray-400 mr-2.5 shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 1110.5 2.5a7.5 7.5 0 0110.602 10.602z"></path>
@@ -76,17 +76,17 @@
             </div>
 
             <!-- Right Navigation -->
-            <div class="flex items-center space-x-6 text-sm font-semibold text-gray-950 shrink-0">
-                <!-- Language switcher -->
-                <button class="hover:text-gray-700 transition flex items-center space-x-1">
+            <div class="flex items-center space-x-3 sm:space-x-5 text-sm font-semibold text-gray-950 shrink-0">
+                <!-- Language switcher (hidden on mobile) -->
+                <button class="hidden sm:flex hover:text-gray-700 transition items-center space-x-1">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-.778.099-1.533.284-2.253" />
                     </svg>
                     <span>العربية</span>
                 </button>
 
-                <!-- Profile Dropdown -->
-                <div class="relative cursor-pointer group flex items-center space-x-1 py-1.5">
+                <!-- Profile Dropdown (hidden on mobile) -->
+                <div class="hidden sm:flex relative cursor-pointer group items-center space-x-1 py-1.5">
                     <svg class="w-5 h-5 text-gray-800" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
                     </svg>
@@ -119,27 +119,41 @@
                             </span>
                         @endif
                     </div>
-                    <span>Cart</span>
+                    <span class="hidden sm:block">Cart</span>
                 </a>
+
+                <!-- Mobile hamburger -->
+                <button class="sm:hidden p-1 rounded-lg hover:bg-yellow-400 transition" onclick="document.getElementById('orders-mobile-menu').classList.toggle('hidden')">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                </button>
             </div>
 
+        </div>
+        <!-- Mobile menu dropdown -->
+        <div id="orders-mobile-menu" class="hidden sm:hidden bg-[#FEE000] border-t border-yellow-400 px-4 py-3 space-y-1">
+            <a href="{{ route('profile.edit') }}" class="flex items-center px-3 py-2.5 rounded-lg bg-black/5 text-sm font-bold text-gray-900">My Profile</a>
+            <a href="{{ route('dashboard') }}" class="flex items-center px-3 py-2.5 rounded-lg bg-black/5 text-sm font-bold text-gray-900">Home</a>
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button type="submit" class="w-full flex items-center px-3 py-2.5 rounded-lg bg-black/5 text-sm font-bold text-red-700 text-left">Sign out</button>
+            </form>
         </div>
     </div>
 
     {{-- ======== MAIN CONTAINER ======== --}}
-    <main class="flex-grow max-w-[1400px] w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <main class="flex-grow max-w-[1400px] w-full mx-auto px-3 sm:px-6 lg:px-8 py-5 sm:py-8">
         
         <!-- Dev simulator utility widget for review -->
-        <div class="mb-6 bg-[#ebf3fe] border border-blue-200 rounded-xl p-4 flex flex-col md:flex-row items-center justify-between shadow-sm">
+        <div class="mb-4 sm:mb-6 bg-[#ebf3fe] border border-blue-200 rounded-xl p-3 sm:p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-sm">
             <div class="flex items-center space-x-3">
                 <span class="bg-blue-600 text-white text-xs font-bold px-2 py-0.5 rounded-full uppercase">Simulator</span>
-                <p class="text-sm font-semibold text-blue-900">Choose which state to test in this demonstration:</p>
+                <p class="text-sm font-semibold text-blue-900">Choose which state to test:</p>
             </div>
-            <div class="flex items-center space-x-3 mt-3 md:mt-0">
-                <button onclick="switchView('empty')" id="btn-view-empty" class="px-4 py-1.5 text-xs font-bold rounded-lg border border-blue-600 bg-blue-600 text-white shadow-sm transition">
-                    Empty Orders State (As Screenshot)
+            <div class="flex items-center flex-wrap gap-2">
+                <button onclick="switchView('empty')" id="btn-view-empty" class="px-3 py-1.5 text-xs font-bold rounded-lg border border-blue-600 bg-blue-600 text-white shadow-sm transition">
+                    Empty Orders State
                 </button>
-                <button onclick="switchView('populated')" id="btn-view-populated" class="px-4 py-1.5 text-xs font-bold rounded-lg border border-blue-600 bg-white text-blue-600 hover:bg-blue-50 transition">
+                <button onclick="switchView('populated')" id="btn-view-populated" class="px-3 py-1.5 text-xs font-bold rounded-lg border border-blue-600 bg-white text-blue-600 hover:bg-blue-50 transition">
                     Populated Orders List
                 </button>
             </div>

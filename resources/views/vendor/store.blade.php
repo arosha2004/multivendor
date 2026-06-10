@@ -11,15 +11,21 @@
 
     <!-- Top Yellow Header mimicking emall -->
     <div class="bg-[#FEE000] w-full relative z-50 shadow-sm" style="background-color: #FEE000;">
-        <div class="max-w-[1400px] mx-auto px-4 sm:px-6 flex items-center justify-between py-3.5">
-            <div class="flex items-center space-x-5 shrink-0">
-                <a href="{{ route('dashboard') }}" class="text-3xl sm:text-4xl font-extrabold tracking-tighter text-black lowercase leading-none hover:opacity-85 transition">emall</a>
+        <div class="max-w-[1400px] mx-auto px-3 sm:px-6 flex items-center justify-between py-3">
+            <div class="flex items-center space-x-3 shrink-0">
+                <a href="{{ route('dashboard') }}" class="text-2xl sm:text-3xl font-extrabold tracking-tighter text-black lowercase leading-none hover:opacity-85 transition">emall</a>
                 <div class="hidden md:flex items-center text-sm font-semibold text-gray-900 cursor-pointer space-x-1">
                     <span class="text-xs sm:text-sm">Store: {{ $vendor->name }}</span>
                 </div>
             </div>
 
-            <div class="hidden lg:flex items-center space-x-6 text-sm font-semibold text-gray-900 shrink-0">
+            <!-- Mobile: back button -->
+            <a href="{{ route('dashboard') }}" class="lg:hidden flex items-center space-x-1 text-sm font-semibold text-gray-800">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"/></svg>
+                <span class="hidden sm:block">Back</span>
+            </a>
+
+            <div class="hidden lg:flex items-center space-x-5 text-sm font-semibold text-gray-900 shrink-0">
                 <a href="{{ route('dashboard') }}" class="flex items-center cursor-pointer hover:text-gray-700 transition space-x-1.5">
                     <span>Back to Home</span>
                 </a>
@@ -42,14 +48,14 @@
     </div>
 
     <!-- Main Content -->
-    <div class="max-w-[1400px] mx-auto p-4 md:p-8 bg-[#FCFBF4] min-h-screen border-l border-r border-gray-200">
+    <div class="max-w-[1400px] mx-auto p-3 sm:p-4 md:p-8 bg-[#FCFBF4] min-h-screen border-l border-r border-gray-200">
         
-        <div class="mb-8 flex items-center space-x-4">
-            <div class="w-16 h-16 rounded-full bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center text-white font-black text-3xl shadow">
+        <div class="mb-6 sm:mb-8 flex items-center space-x-4">
+            <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center text-white font-black text-2xl sm:text-3xl shadow">
                 {{ strtoupper(substr($vendor->name, 0, 1)) }}
             </div>
             <div>
-                <h1 class="text-2xl md:text-3xl font-bold text-gray-850">{{ $vendor->name }}'s Store</h1>
+                <h1 class="text-xl sm:text-2xl md:text-3xl font-bold text-gray-850">{{ $vendor->name }}'s Store</h1>
                 <p class="text-gray-500 text-sm">Showing all {{ $products->count() }} products from this seller</p>
             </div>
         </div>

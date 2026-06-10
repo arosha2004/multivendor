@@ -101,14 +101,14 @@
                                 
                                 <div class="mt-auto">
                                     <div class="flex items-baseline space-x-1 mb-1">
-                                        <span class="text-xs text-gray-500 font-semibold">AED</span>
+                                        <span class="text-xs text-gray-500 font-semibold">LKR</span>
                                         <span class="text-lg font-extrabold text-gray-900">{{ number_format($product->price, 2) }}</span>
                                     </div>
 
                                     @if($product->original_price && $product->original_price > $product->price)
                                         @php $disc = round((($product->original_price - $product->price) / $product->original_price) * 100); @endphp
                                         <div class="flex items-center space-x-2 text-xs">
-                                            <span class="text-gray-400 line-through">AED {{ number_format($product->original_price, 2) }}</span>
+                                            <span class="text-gray-400 line-through">LKR {{ number_format($product->original_price, 2) }}</span>
                                             <span class="text-[#1FA628] font-bold">{{ $disc }}% Off</span>
                                         </div>
                                     @else

@@ -86,7 +86,7 @@
                                     <a href="{{ route('products.show', $id) }}" class="text-[15px] font-bold text-[#404553] leading-snug hover:text-blue-600 transition-colors">{{ $details['title'] }}</a>
                                     <div class="text-right shrink-0">
                                         <div class="flex items-baseline space-x-1">
-                                            <span class="text-[13px] font-extrabold text-[#404553]">AED</span>
+                                            <span class="text-[13px] font-extrabold text-[#404553]">LKR</span>
                                             <span class="text-lg font-extrabold text-[#404553]">{{ number_format($details['price'], 2) }}</span>
                                         </div>
                                     </div>
@@ -197,12 +197,12 @@
                         <div class="space-y-2 mb-4">
                             <div class="flex justify-between text-[13px] text-[#404553]">
                                 <span>Subtotal</span>
-                                <span class="font-bold">AED {{ number_format($total, 2) }}</span>
+                                <span class="font-bold">LKR {{ number_format($total, 2) }}</span>
                             </div>
                             <div class="flex justify-between text-[13px] text-[#404553]">
                                 <span>Shipping Fee</span>
                                 <div class="flex items-center space-x-1.5">
-                                    <span class="text-[#7E859B] line-through">AED 11.00</span>
+                                    <span class="text-[#7E859B] line-through">LKR 11.00</span>
                                     <span class="font-bold text-[#38AE04]">FREE</span>
                                 </div>
                             </div>
@@ -213,7 +213,7 @@
                                 <span class="font-bold text-[15px] text-[#404553]">Total</span>
                                 <span class="text-xs text-[#7E859B] ml-1">Incl. VAT</span>
                             </div>
-                            <div class="text-lg font-extrabold text-[#404553]">AED {{ number_format($total, 2) }}</div>
+                            <div class="text-lg font-extrabold text-[#404553]">LKR {{ number_format($total, 2) }}</div>
                         </div>
                         
                         <button class="w-full bg-[#3866DF] text-white text-[15px] font-bold py-3.5 rounded hover:bg-blue-700 transition-colors shadow-sm tracking-wide">

@@ -123,7 +123,7 @@
                                     <x-input-error :messages="$errors->get('category')" class="mt-2" />
                                 </div>
                                 <div>
-                                    <x-input-label for="price" value="Price (AED)" class="font-semibold text-gray-700" />
+                                    <x-input-label for="price" value="Price (LKR)" class="font-semibold text-gray-700" />
                                     <x-text-input id="price" name="price" type="number" step="0.01" class="mt-1.5 block w-full focus:border-indigo-500 focus:ring-indigo-500 rounded-lg shadow-sm border-gray-300" required />
                                     <x-input-error :messages="$errors->get('price')" class="mt-2" />
                                 </div>
@@ -231,7 +231,7 @@
                                                         {{ $product->category }}
                                                     </span>
                                                 </td>
-                                                <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-900">AED {{ number_format($product->price, 2) }}</td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-900">LKR {{ number_format($product->price, 2) }}</td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-400">{{ $product->created_at->format('M d, Y') }}</td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                                                     <div class="flex items-center space-x-3">
@@ -749,7 +749,7 @@
                                 </div>
 
                                 <div class="flex items-baseline mb-0.5">
-                                    <span class="text-xs font-semibold mr-1">AED</span>
+                                    <span class="text-xs font-semibold mr-1">LKR</span>
                                     <span class="text-lg font-bold text-gray-900">{{ number_format($product->price, 2) }}</span>
                                 </div>
 

@@ -127,7 +127,7 @@
                                 <div class="space-y-2">
                                     <div class="flex justify-between items-start gap-2">
                                         <h3 class="text-md font-bold text-gray-900 leading-snug line-clamp-2">{{ $product->title }}</h3>
-                                        <span class="text-md font-extrabold text-indigo-700 whitespace-nowrap">AED {{ number_format($product->price, 2) }}</span>
+                                        <span class="text-md font-extrabold text-indigo-700 whitespace-nowrap">LKR {{ number_format($product->price, 2) }}</span>
                                     </div>
                                     
                                     @if($product->description)
@@ -223,7 +223,7 @@
 
                     <div class="grid grid-cols-2 gap-4">
                         <div>
-                            <x-input-label for="edit-price" value="Price (AED)" class="font-semibold" />
+                            <x-input-label for="edit-price" value="Price (LKR)" class="font-semibold" />
                             <x-text-input id="edit-price" name="price" type="number" step="0.01" class="mt-1.5 block w-full" required />
                         </div>
                         <div>

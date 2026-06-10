@@ -306,11 +306,11 @@
 
                     {{-- Price --}}
                     <div class="flex items-baseline space-x-3 mb-1">
-                        <span class="text-sm font-semibold text-gray-500">AED</span>
+                        <span class="text-sm font-semibold text-gray-500">LKR</span>
                         <span class="text-4xl font-extrabold text-gray-900">{{ number_format($product->price, 2) }}</span>
                         @if($product->original_price && $product->original_price > $product->price)
                             @php $disc = round((($product->original_price - $product->price) / $product->original_price) * 100); @endphp
-                            <span class="text-base text-gray-400 line-through">AED {{ number_format($product->original_price, 2) }}</span>
+                            <span class="text-base text-gray-400 line-through">LKR {{ number_format($product->original_price, 2) }}</span>
                             <span class="text-base font-bold text-[#E62E2E]">{{ $disc }}% Off</span>
                             <span class="flex items-center text-xs font-bold text-[#E62E2E] bg-red-50 px-2 py-0.5 rounded-full border border-red-200">
                                 🔥 Selling out fast
@@ -359,7 +359,7 @@
                                 <span class="badge-express">express</span>
                                 <span class="text-sm font-medium text-gray-700">Get it by <strong>Tomorrow</strong></span>
                             </div>
-                            <span class="text-sm font-semibold text-gray-800">AED {{ number_format($product->price, 2) }} ↗</span>
+                            <span class="text-sm font-semibold text-gray-800">LKR {{ number_format($product->price, 2) }} ↗</span>
                         </div>
                     </div>
 

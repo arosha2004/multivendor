@@ -52,12 +52,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/vendor/products', [ProductController::class, 'vendorIndex'])->name('vendor.products');
     
     Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
-});
 
-Route::post('/cart/add/{product}', [CartController::class, 'add'])->name('cart.add');
-Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
-Route::patch('/cart/{id}', [CartController::class, 'update'])->name('cart.update');
-Route::delete('/cart/{id}', [CartController::class, 'remove'])->name('cart.remove');
+    Route::post('/cart/add/{product}', [CartController::class, 'add'])->name('cart.add');
+    Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+    Route::patch('/cart/{id}', [CartController::class, 'update'])->name('cart.update');
+    Route::delete('/cart/{id}', [CartController::class, 'remove'])->name('cart.remove');
+});
 
 require __DIR__.'/auth.php';
 

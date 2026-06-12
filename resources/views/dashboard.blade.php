@@ -563,6 +563,14 @@
 
                 <!-- Top Right Nav (desktop) -->
                 <div class="hidden lg:flex items-center space-x-5 text-sm font-semibold text-gray-900 shrink-0">
+                    <!-- Language Switcher -->
+                    <a href="#" class="flex items-center cursor-pointer hover:text-gray-700 transition space-x-1.5 text-[15px] font-bold">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.974 0-5.749-.557-8.168-1.558M20.924 13.5c-1.874.887-4.148 1.5-6.674 1.5-2.526 0-4.8-.613-6.674-1.5" />
+                        </svg>
+                        <span>LK</span>
+                    </a>
+                    <span class="text-gray-300 hidden xl:inline">|</span>
                     @guest
                         <div class="flex items-center space-x-3">
                             <a href="{{ route('login') }}" class="flex items-center cursor-pointer hover:text-gray-700 transition space-x-1.5">
